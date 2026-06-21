@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vyasa &middot; Competitive Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/styles.css" />
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+    // Fetch JSX source, compile with Babel, then run as a classic script.
+    // More reliable than Babel's auto-scan of external text/babel scripts.
+    (function () {
+      function boot() {
+        fetch("/static/app.js?v=" + Date.now())
+          .then(function (r) { return r.text(); })
+          .then(function (src) {
+            var compiled = Babel.transform(src, {
+              presets: [["react", { runtime: "classic" }]],
+            }).code;
+            var s = document.createElement("script");
+            s.textContent = compiled;
+            document.body.appendChild(s);
+          })
+          .catch(function (e) {
+            document.getElementById("root").innerHTML =
+              '<pre style="padding:40px;color:#a8412c">Failed to load app: ' + e + "</pre>";
+          });
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", boot);
+      } else {
+        boot();
+      }
+    })();
+  </script>
+</body>
+</html>

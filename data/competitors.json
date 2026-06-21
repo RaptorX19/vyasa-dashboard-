@@ -1,0 +1,1602 @@
+[
+  {
+    "id": "lio",
+    "name": "Lio",
+    "category": "4. Procurement / procure-to-pay / intake-to-pay",
+    "categoryGroup": 4,
+    "website": "https://lio.ai/",
+    "founder": "Vladimir Keil (CEO), Lukas Heinzmann (CTO), Till Wagner (COO)",
+    "customerSegment": "Global enterprises (e.g., manufacturing like Schaeffler)",
+    "relevance": "High",
+    "overview": "World's first multi-agent AI procurement workforce; handles purchase requests end-to-end (vendor research, negotiation, approvals, tracking).",
+    "established": "2023",
+    "fundingStage": "Series A",
+    "fundingAmount": 30,
+    "fundingYear": 2026,
+    "investors": "a16z (led); SV Angels, Harry Stebbings, YC",
+    "strengths": [
+      "Strong positioning in procurement / procure-to-pay / intake-to-pay",
+      "Agentic AI layer that executes full procurement workflows on top of existing P2P/ERP systems",
+      "Backed by a16z (led); SV Angels, Harry Stebbings, YC"
+    ],
+    "weaknesses": [
+      "Heavy dependence on ERP integration quality",
+      "Likely enterprise implementation complexity",
+      "Many offerings still early-stage or scaling"
+    ],
+    "opportunities": [
+      "Growing enterprise demand for agentic AI workflows",
+      "ERP modernization and automation budgets increasing",
+      "Potential expansion into adjacent operational workflows"
+    ],
+    "threats": [
+      "Competition from SAP, Oracle, Workday, and Microsoft ecosystems",
+      "Enterprise security and governance concerns",
+      "Rapid commoditization of AI workflow automation"
+    ],
+    "strategicNotes": "Multi-agent system reduces procurement workload 85%; operates across ERPs/inboxes/contracts.",
+    "source": "seed",
+    "capabilities": {
+      "enterprise_context_graph": "partial",
+      "cross_system_orchestration": "partial",
+      "persistent_workflow_state": "partial",
+      "human_approvals": "full",
+      "agentic_execution": "full",
+      "erp_crm_integration": "full",
+      "exception_handling": "partial"
+    },
+    "workflows": {
+      "lead_to_order": "partial",
+      "order_to_cash": "none",
+      "procure_to_pay": "direct",
+      "customer_onboarding": "none",
+      "contract_operations": "partial",
+      "finance_operations": "partial",
+      "supply_chain": "direct",
+      "exception_management": "partial"
+    },
+    "positioning": {
+      "reasoning": 56,
+      "orchestration": 50,
+      "scope": 50,
+      "action": 68,
+      "context": 50
+    },
+    "contextScore": 71,
+    "sourceUrl": "https://lio.ai/",
+    "confidence": "medium",
+    "evidenceNote": "Capabilities, workflow overlap and positioning are inferred from public category signals — verify before use in deals.",
+    "lastVerified": "2026-06-21",
+    "battlecard": {
+      "sells": "World's first multi-agent AI procurement workforce; handles purchase requests end-to-end (vendor research, negotiation, approvals, tracking).",
+      "buyers": "Global enterprises (e.g., manufacturing like Schaeffler)",
+      "whyChosen": "Focused, category-leading point solution in 4. Procurement / procure-to-pay / intake-to-pay with credible investor backing (a16z (led); SV Angels, Harry Stebbings, YC).",
+      "strong": [
+        "Strong positioning in procurement / procure-to-pay / intake-to-pay",
+        "Agentic AI layer that executes full procurement workflows on top of existing P2P/ERP systems"
+      ],
+      "vyasaStronger": [
+        "Enterprise context graph spanning systems, not a single workflow",
+        "Cross-system orchestration above the stack (not a point tool)",
+        "Persistent workflow state + exception reasoning with human approvals"
+      ],
+      "objection": "“We already use a tool for this workflow — why add Vyasa?”",
+      "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
+      "discovery": [
+        "Which systems does this process span today (ERP, CRM, inbox, contracts)?",
+        "How are exceptions and approvals handled when the workflow breaks?",
+        "Do you need orchestration across departments, or a single point fix?"
+      ],
+      "doNotCompete": [
+        "Deep single-workflow UI polish",
+        "Commodity RPA scripting"
+      ],
+      "source": "seed"
+    }
+  },
+  {
+    "id": "didero",
+    "name": "Didero",
+    "category": "4. Procurement / procure-to-pay / supply chain",
+    "categoryGroup": 4,
+    "website": "https://www.didero.ai/",
+    "founder": "",
+    "customerSegment": "Manufacturers & wholesale distributors",
+    "relevance": "High",
+    "overview": "AI procurement agents that autonomously handle supplier comms, order tracking, exception management.",
+    "established": "",
+    "fundingStage": "Series A",
+    "fundingAmount": 30,
+    "fundingYear": 2026,
+    "investors": "Chemistry + Headline (co-led); M12 (Microsoft)",
+    "strengths": [
+      "Strong positioning in procurement / procure-to-pay / supply chain",
+      "Agentic layer sitting directly on top of existing ERP for procurement/supply-chain execution",
+      "Backed by Chemistry + Headline (co-led); M12 (Microsoft)"
+    ],
+    "weaknesses": [
+      "Heavy dependence on ERP integration quality",
+      "Likely enterprise implementation complexity",
+      "Many offerings still early-stage or scaling"
+    ],
+    "opportunities": [
+      "Growing enterprise demand for agentic AI workflows",
+      "ERP modernization and automation budgets increasing",
+      "Potential expansion into adjacent operational workflows"
+    ],
+    "threats": [
+      "Competition from SAP, Oracle, Workday, and Microsoft ecosystems",
+      "Enterprise security and governance concerns",
+      "Rapid commoditization of AI workflow automation"
+    ],
+    "strategicNotes": "AI agents reduce manual procurement tasks; contextual understanding of ERP data/policies.",
+    "source": "seed",
+    "capabilities": {
+      "enterprise_context_graph": "partial",
+      "cross_system_orchestration": "partial",
+      "persistent_workflow_state": "partial",
+      "human_approvals": "full",
+      "agentic_execution": "full",
+      "erp_crm_integration": "full",
+      "exception_handling": "partial"
+    },
+    "workflows": {
+      "lead_to_order": "partial",
+      "order_to_cash": "none",
+      "procure_to_pay": "direct",
+      "customer_onboarding": "none",
+      "contract_operations": "partial",
+      "finance_operations": "partial",
+      "supply_chain": "direct",
+      "exception_management": "partial"
+    },
+    "positioning": {
+      "reasoning": 49,
+      "orchestration": 52,
+      "scope": 50,
+      "action": 68,
+      "context": 50
+    },
+    "contextScore": 71,
+    "sourceUrl": "https://www.didero.ai/",
+    "confidence": "medium",
+    "evidenceNote": "Capabilities, workflow overlap and positioning are inferred from public category signals — verify before use in deals.",
+    "lastVerified": "2026-06-21",
+    "battlecard": {
+      "sells": "AI procurement agents that autonomously handle supplier comms, order tracking, exception management.",
+      "buyers": "Manufacturers & wholesale distributors",
+      "whyChosen": "Focused, category-leading point solution in 4. Procurement / procure-to-pay / supply chain with credible investor backing (Chemistry + Headline (co-led); M12 (Microsoft)).",
+      "strong": [
+        "Strong positioning in procurement / procure-to-pay / supply chain",
+        "Agentic layer sitting directly on top of existing ERP for procurement/supply-chain execution"
+      ],
+      "vyasaStronger": [
+        "Enterprise context graph spanning systems, not a single workflow",
+        "Cross-system orchestration above the stack (not a point tool)",
+        "Persistent workflow state + exception reasoning with human approvals"
+      ],
+      "objection": "“We already use a tool for this workflow — why add Vyasa?”",
+      "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
+      "discovery": [
+        "Which systems does this process span today (ERP, CRM, inbox, contracts)?",
+        "How are exceptions and approvals handled when the workflow breaks?",
+        "Do you need orchestration across departments, or a single point fix?"
+      ],
+      "doNotCompete": [
+        "Deep single-workflow UI polish",
+        "Commodity RPA scripting"
+      ],
+      "source": "seed"
+    }
+  },
+  {
+    "id": "nominal",
+    "name": "Nominal",
+    "category": "3. Finance/accounting automation (also 2. AI layer on ERP)",
+    "categoryGroup": 3,
+    "website": "https://www.nominal.so/",
+    "founder": "",
+    "customerSegment": "Mid-market & enterprise finance teams",
+    "relevance": "High",
+    "overview": "AI agents for finance ops: reconciliation, intercompany eliminations, consolidation, close workflows.",
+    "established": "",
+    "fundingStage": "Series A",
+    "fundingAmount": 20,
+    "fundingYear": 2025,
+    "investors": "Next47 (led); Workday Ventures",
+    "strengths": [
+      "Strong positioning in finance/accounting automation (also AI layer on ERP)",
+      "Plugs into existing ERP without migration; automates GL-level finance processes",
+      "Backed by Next47 (led); Workday Ventures"
+    ],
+    "weaknesses": [
+      "Heavy dependence on ERP integration quality",
+      "Likely enterprise implementation complexity",
+      "Many offerings still early-stage or scaling"
+    ],
+    "opportunities": [
+      "Growing enterprise demand for agentic AI workflows",
+      "ERP modernization and automation budgets increasing",
+      "Potential expansion into adjacent operational workflows"
+    ],
+    "threats": [
+      "Competition from SAP, Oracle, Workday, and Microsoft ecosystems",
+      "Enterprise security and governance concerns",
+      "Rapid commoditization of AI workflow automation"
+    ],
+    "strategicNotes": "Agentic finance automation layer on legacy ERP; 50k+ hours saved in manual work.",
+    "source": "seed",
+    "capabilities": {
+      "enterprise_context_graph": "partial",
+      "cross_system_orchestration": "partial",
+      "persistent_workflow_state": "partial",
+      "human_approvals": "full",
+      "agentic_execution": "partial",
+      "erp_crm_integration": "full",
+      "exception_handling": "partial"
+    },
+    "workflows": {
+      "lead_to_order": "none",
+      "order_to_cash": "partial",
+      "procure_to_pay": "partial",
+      "customer_onboarding": "none",
+      "contract_operations": "partial",
+      "finance_operations": "direct",
+      "supply_chain": "none",
+      "exception_management": "partial"
+    },
+    "positioning": {
+      "reasoning": 52,
+      "orchestration": 34,
+      "scope": 45,
+      "action": 55,
+      "context": 48
+    },
+    "contextScore": 64,
+    "sourceUrl": "https://www.nominal.so/",
+    "confidence": "medium",
+    "evidenceNote": "Capabilities, workflow overlap and positioning are inferred from public category signals — verify before use in deals.",
+    "lastVerified": "2026-06-21",
+    "battlecard": {
+      "sells": "AI agents for finance ops: reconciliation, intercompany eliminations, consolidation, close workflows.",
+      "buyers": "Mid-market & enterprise finance teams",
+      "whyChosen": "Focused, category-leading point solution in 3. Finance/accounting automation (also 2. AI layer on ERP) with credible investor backing (Next47 (led); Workday Ventures).",
+      "strong": [
+        "Strong positioning in finance/accounting automation (also AI layer on ERP)",
+        "Plugs into existing ERP without migration; automates GL-level finance processes"
+      ],
+      "vyasaStronger": [
+        "Enterprise context graph spanning systems, not a single workflow",
+        "Cross-system orchestration above the stack (not a point tool)",
+        "Persistent workflow state + exception reasoning with human approvals"
+      ],
+      "objection": "“We already use a tool for this workflow — why add Vyasa?”",
+      "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
+      "discovery": [
+        "Which systems does this process span today (ERP, CRM, inbox, contracts)?",
+        "How are exceptions and approvals handled when the workflow breaks?",
+        "Do you need orchestration across departments, or a single point fix?"
+      ],
+      "doNotCompete": [
+        "Deep single-workflow UI polish",
+        "Commodity RPA scripting"
+      ],
+      "source": "seed"
+    }
+  },
+  {
+    "id": "nexus",
+    "name": "Nexus",
+    "category": "8. Enterprise agent platforms (ERP-specific)",
+    "categoryGroup": 8,
+    "website": "https://agent.nexus/",
+    "founder": "",
+    "customerSegment": "Enterprises (e.g., telecom ops)",
+    "relevance": "Medium-High",
+    "overview": "Enterprise AI agent platform for non-technical teams to deploy autonomous agents across workflows.",
+    "established": "",
+    "fundingStage": "Seed",
+    "fundingAmount": 4.3,
+    "fundingYear": 2026,
+    "investors": "General Catalyst (led); YC + others",
+    "strengths": [
+      "Strong positioning in enterprise agent platforms (ERP-specific)",
+      "Connects agents to ERP/CRM for end-to-end back-office/ops automation",
+      "Backed by General Catalyst (led); YC + others"
+    ],
+    "weaknesses": [
+      "Heavy dependence on ERP integration quality",
+      "Likely enterprise implementation complexity",
+      "Many offerings still early-stage or scaling"
+    ],
+    "opportunities": [
+      "Growing enterprise demand for agentic AI workflows",
+      "ERP modernization and automation budgets increasing",
+      "Potential expansion into adjacent operational workflows"
+    ],
+    "threats": [
+      "Competition from SAP, Oracle, Workday, and Microsoft ecosystems",
+      "Enterprise security and governance concerns",
+      "Rapid commoditization of AI workflow automation"
+    ],
+    "strategicNotes": "Broad agent platform but explicitly ERP-integrated for operational workflows; governance built-in.",
+    "source": "seed",
+    "capabilities": {
+      "enterprise_context_graph": "partial",
+      "cross_system_orchestration": "full",
+      "persistent_workflow_state": "partial",
+      "human_approvals": "partial",
+      "agentic_execution": "full",
+      "erp_crm_integration": "partial",
+      "exception_handling": "partial"
+    },
+    "workflows": {
+      "lead_to_order": "partial",
+      "order_to_cash": "partial",
+      "procure_to_pay": "partial",
+      "customer_onboarding": "partial",
+      "contract_operations": "partial",
+      "finance_operations": "partial",
+      "supply_chain": "partial",
+      "exception_management": "direct"
+    },
+    "positioning": {
+      "reasoning": 78,
+      "orchestration": 68,
+      "scope": 62,
+      "action": 66,
+      "context": 52
+    },
+    "contextScore": 64,
+    "sourceUrl": "https://agent.nexus/",
+    "confidence": "medium",
+    "evidenceNote": "Capabilities, workflow overlap and positioning are inferred from public category signals — verify before use in deals.",
+    "lastVerified": "2026-06-21",
+    "battlecard": {
+      "sells": "Enterprise AI agent platform for non-technical teams to deploy autonomous agents across workflows.",
+      "buyers": "Enterprises (e.g., telecom ops)",
+      "whyChosen": "Focused, category-leading point solution in 8. Enterprise agent platforms (ERP-specific) with credible investor backing (General Catalyst (led); YC + others).",
+      "strong": [
+        "Strong positioning in enterprise agent platforms (ERP-specific)",
+        "Connects agents to ERP/CRM for end-to-end back-office/ops automation"
+      ],
+      "vyasaStronger": [
+        "Enterprise context graph spanning systems, not a single workflow",
+        "Cross-system orchestration above the stack (not a point tool)",
+        "Persistent workflow state + exception reasoning with human approvals"
+      ],
+      "objection": "“We already use a tool for this workflow — why add Vyasa?”",
+      "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
+      "discovery": [
+        "Which systems does this process span today (ERP, CRM, inbox, contracts)?",
+        "How are exceptions and approvals handled when the workflow breaks?",
+        "Do you need orchestration across departments, or a single point fix?"
+      ],
+      "doNotCompete": [
+        "Deep single-workflow UI polish",
+        "Commodity RPA scripting"
+      ],
+      "source": "seed"
+    }
+  },
+  {
+    "id": "dualentry",
+    "name": "DualEntry",
+    "category": "1. AI-native ERP or ERP replacement",
+    "categoryGroup": 1,
+    "website": "https://www.dualentry.com/",
+    "founder": "",
+    "customerSegment": "Mid-market (real estate, adtech, fintech)",
+    "relevance": "High",
+    "overview": "AI-native ERP for mid-market; unified GL, AP/AR, revenue recognition, multi-entity.",
+    "established": "",
+    "fundingStage": "Series A",
+    "fundingAmount": 90,
+    "fundingYear": 2025,
+    "investors": "Lightspeed, Khosla Ventures",
+    "strengths": [
+      "Strong positioning in AI-native ERP or ERP replacement",
+      "Full AI-native ERP replacement with native automations",
+      "Backed by Lightspeed, Khosla Ventures"
+    ],
+    "weaknesses": [
+      "Heavy dependence on ERP integration quality",
+      "Likely enterprise implementation complexity",
+      "Many offerings still early-stage or scaling"
+    ],
+    "opportunities": [
+      "Growing enterprise demand for agentic AI workflows",
+      "ERP modernization and automation budgets increasing",
+      "Potential expansion into adjacent operational workflows"
+    ],
+    "threats": [
+      "Competition from SAP, Oracle, Workday, and Microsoft ecosystems",
+      "Enterprise security and governance concerns",
+      "Rapid commoditization of AI workflow automation"
+    ],
+    "strategicNotes": "AI agents for full back-office workflows; rapid implementation vs legacy ERP.",
+    "source": "seed",
+    "capabilities": {
+      "enterprise_context_graph": "partial",
+      "cross_system_orchestration": "partial",
+      "persistent_workflow_state": "full",
+      "human_approvals": "full",
+      "agentic_execution": "partial",
+      "erp_crm_integration": "full",
+      "exception_handling": "partial"
+    },
+    "workflows": {
+      "lead_to_order": "partial",
+      "order_to_cash": "direct",
+      "procure_to_pay": "partial",
+      "customer_onboarding": "partial",
+      "contract_operations": "partial",
+      "finance_operations": "direct",
+      "supply_chain": "none",
+      "exception_management": "partial"
+    },
+    "positioning": {
+      "reasoning": 44,
+      "orchestration": 78,
+      "scope": 60,
+      "action": 65,
+      "context": 55
+    },
+    "contextScore": 71,
+    "sourceUrl": "https://www.dualentry.com/",
+    "confidence": "medium",
+    "evidenceNote": "Capabilities, workflow overlap and positioning are inferred from public category signals — verify before use in deals.",
+    "lastVerified": "2026-06-21",
+    "battlecard": {
+      "sells": "AI-native ERP for mid-market; unified GL, AP/AR, revenue recognition, multi-entity.",
+      "buyers": "Mid-market (real estate, adtech, fintech)",
+      "whyChosen": "Focused, category-leading point solution in 1. AI-native ERP or ERP replacement with credible investor backing (Lightspeed, Khosla Ventures).",
+      "strong": [
+        "Strong positioning in AI-native ERP or ERP replacement",
+        "Full AI-native ERP replacement with native automations"
+      ],
+      "vyasaStronger": [
+        "Enterprise context graph spanning systems, not a single workflow",
+        "Cross-system orchestration above the stack (not a point tool)",
+        "Persistent workflow state + exception reasoning with human approvals"
+      ],
+      "objection": "“We already use a tool for this workflow — why add Vyasa?”",
+      "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
+      "discovery": [
+        "Which systems does this process span today (ERP, CRM, inbox, contracts)?",
+        "How are exceptions and approvals handled when the workflow breaks?",
+        "Do you need orchestration across departments, or a single point fix?"
+      ],
+      "doNotCompete": [
+        "Deep single-workflow UI polish",
+        "Commodity RPA scripting"
+      ],
+      "source": "seed"
+    }
+  },
+  {
+    "id": "rillet",
+    "name": "Rillet",
+    "category": "1. AI-native ERP or ERP replacement",
+    "categoryGroup": 1,
+    "website": "https://www.rillet.com/",
+    "founder": "",
+    "customerSegment": "Scaling/fast-growing companies (200+ customers)",
+    "relevance": "High",
+    "overview": "AI-native ERP; perpetual GL, revenue recognition, close management, real-time reporting.",
+    "established": "",
+    "fundingStage": "Series B",
+    "fundingAmount": 70,
+    "fundingYear": 2025,
+    "investors": "a16z, ICONIQ (co-led)",
+    "strengths": [
+      "Strong positioning in AI-native ERP or ERP replacement",
+      "Full AI-native ERP replacement; replaces duct-taped legacy",
+      "Backed by a16z, ICONIQ (co-led)"
+    ],
+    "weaknesses": [
+      "Heavy dependence on ERP integration quality",
+      "Likely enterprise implementation complexity",
+      "Many offerings still early-stage or scaling"
+    ],
+    "opportunities": [
+      "Growing enterprise demand for agentic AI workflows",
+      "ERP modernization and automation budgets increasing",
+      "Potential expansion into adjacent operational workflows"
+    ],
+    "threats": [
+      "Competition from SAP, Oracle, Workday, and Microsoft ecosystems",
+      "Enterprise security and governance concerns",
+      "Rapid commoditization of AI workflow automation"
+    ],
+    "strategicNotes": "CPA-led AI agents for continuous close, workflows; SOX-compliant.",
+    "source": "seed",
+    "capabilities": {
+      "enterprise_context_graph": "partial",
+      "cross_system_orchestration": "partial",
+      "persistent_workflow_state": "full",
+      "human_approvals": "full",
+      "agentic_execution": "partial",
+      "erp_crm_integration": "full",
+      "exception_handling": "partial"
+    },
+    "workflows": {
+      "lead_to_order": "partial",
+      "order_to_cash": "direct",
+      "procure_to_pay": "partial",
+      "customer_onboarding": "partial",
+      "contract_operations": "partial",
+      "finance_operations": "direct",
+      "supply_chain": "none",
+      "exception_management": "partial"
+    },
+    "positioning": {
+      "reasoning": 58,
+      "orchestration": 80,
+      "scope": 60,
+      "action": 65,
+      "context": 55
+    },
+    "contextScore": 71,
+    "sourceUrl": "https://www.rillet.com/",
+    "confidence": "medium",
+    "evidenceNote": "Capabilities, workflow overlap and positioning are inferred from public category signals — verify before use in deals.",
+    "lastVerified": "2026-06-21",
+    "battlecard": {
+      "sells": "AI-native ERP; perpetual GL, revenue recognition, close management, real-time reporting.",
+      "buyers": "Scaling/fast-growing companies (200+ customers)",
+      "whyChosen": "Focused, category-leading point solution in 1. AI-native ERP or ERP replacement with credible investor backing (a16z, ICONIQ (co-led)).",
+      "strong": [
+        "Strong positioning in AI-native ERP or ERP replacement",
+        "Full AI-native ERP replacement; replaces duct-taped legacy"
+      ],
+      "vyasaStronger": [
+        "Enterprise context graph spanning systems, not a single workflow",
+        "Cross-system orchestration above the stack (not a point tool)",
+        "Persistent workflow state + exception reasoning with human approvals"
+      ],
+      "objection": "“We already use a tool for this workflow — why add Vyasa?”",
+      "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
+      "discovery": [
+        "Which systems does this process span today (ERP, CRM, inbox, contracts)?",
+        "How are exceptions and approvals handled when the workflow breaks?",
+        "Do you need orchestration across departments, or a single point fix?"
+      ],
+      "doNotCompete": [
+        "Deep single-workflow UI polish",
+        "Commodity RPA scripting"
+      ],
+      "source": "seed"
+    }
+  },
+  {
+    "id": "campfire",
+    "name": "Campfire",
+    "category": "1. AI-native ERP or ERP replacement",
+    "categoryGroup": 1,
+    "website": "https://campfire.ai/",
+    "founder": "",
+    "customerSegment": "Mid-market/enterprise high-growth (e.g., Klarity, Replit)",
+    "relevance": "High",
+    "overview": "AI-native ERP; automates accounting, reconciliations, revenue, forecasting.",
+    "established": "",
+    "fundingStage": "Series B",
+    "fundingAmount": 65,
+    "fundingYear": 2025,
+    "investors": "Accel, Ribbit (co-led)",
+    "strengths": [
+      "Strong positioning in AI-native ERP or ERP replacement",
+      "Full AI-native ERP for finance teams",
+      "Backed by Accel, Ribbit (co-led)"
+    ],
+    "weaknesses": [
+      "Heavy dependence on ERP integration quality",
+      "Likely enterprise implementation complexity",
+      "Many offerings still early-stage or scaling"
+    ],
+    "opportunities": [
+      "Growing enterprise demand for agentic AI workflows",
+      "ERP modernization and automation budgets increasing",
+      "Potential expansion into adjacent operational workflows"
+    ],
+    "threats": [
+      "Competition from SAP, Oracle, Workday, and Microsoft ecosystems",
+      "Enterprise security and governance concerns",
+      "Rapid commoditization of AI workflow automation"
+    ],
+    "strategicNotes": "AI for flux analysis, reconciliations, AR/AP; Ember AI assistant. Prior Series A $35M.",
+    "source": "seed",
+    "capabilities": {
+      "enterprise_context_graph": "partial",
+      "cross_system_orchestration": "partial",
+      "persistent_workflow_state": "full",
+      "human_approvals": "full",
+      "agentic_execution": "partial",
+      "erp_crm_integration": "full",
+      "exception_handling": "partial"
+    },
+    "workflows": {
+      "lead_to_order": "partial",
+      "order_to_cash": "direct",
+      "procure_to_pay": "partial",
+      "customer_onboarding": "partial",
+      "contract_operations": "partial",
+      "finance_operations": "direct",
+      "supply_chain": "none",
+      "exception_management": "partial"
+    },
+    "positioning": {
+      "reasoning": 54,
+      "orchestration": 74,
+      "scope": 60,
+      "action": 65,
+      "context": 55
+    },
+    "contextScore": 71,
+    "sourceUrl": "https://campfire.ai/",
+    "confidence": "medium",
+    "evidenceNote": "Capabilities, workflow overlap and positioning are inferred from public category signals — verify before use in deals.",
+    "lastVerified": "2026-06-21",
+    "battlecard": {
+      "sells": "AI-native ERP; automates accounting, reconciliations, revenue, forecasting.",
+      "buyers": "Mid-market/enterprise high-growth (e.g., Klarity, Replit)",
+      "whyChosen": "Focused, category-leading point solution in 1. AI-native ERP or ERP replacement with credible investor backing (Accel, Ribbit (co-led)).",
+      "strong": [
+        "Strong positioning in AI-native ERP or ERP replacement",
+        "Full AI-native ERP for finance teams"
+      ],
+      "vyasaStronger": [
+        "Enterprise context graph spanning systems, not a single workflow",
+        "Cross-system orchestration above the stack (not a point tool)",
+        "Persistent workflow state + exception reasoning with human approvals"
+      ],
+      "objection": "“We already use a tool for this workflow — why add Vyasa?”",
+      "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
+      "discovery": [
+        "Which systems does this process span today (ERP, CRM, inbox, contracts)?",
+        "How are exceptions and approvals handled when the workflow breaks?",
+        "Do you need orchestration across departments, or a single point fix?"
+      ],
+      "doNotCompete": [
+        "Deep single-workflow UI polish",
+        "Commodity RPA scripting"
+      ],
+      "source": "seed"
+    }
+  },
+  {
+    "id": "doss",
+    "name": "Doss",
+    "category": "2. AI layer / agentic workflow layer on top of ERP (also 6. Supply chain/inventory)",
+    "categoryGroup": 2,
+    "website": "https://www.doss.com/",
+    "founder": "",
+    "customerSegment": "Manufacturing, eCommerce, growth-stage ops teams",
+    "relevance": "High",
+    "overview": "Adaptive ERP/Operations Cloud; AI-native inventory, procurement, finance ops.",
+    "established": "",
+    "fundingStage": "Series B",
+    "fundingAmount": 55,
+    "fundingYear": 2026,
+    "investors": "Madrona, Premji Invest (co-led)",
+    "strengths": [
+      "Strong positioning in AI layer / agentic workflow layer on top of ERP (also supply chain/inventory)",
+      "Layer/plug-in for existing ERP or full modular replacement",
+      "Backed by Madrona, Premji Invest (co-led)"
+    ],
+    "weaknesses": [
+      "Heavy dependence on ERP integration quality",
+      "Likely enterprise implementation complexity",
+      "Many offerings still early-stage or scaling"
+    ],
+    "opportunities": [
+      "Growing enterprise demand for agentic AI workflows",
+      "ERP modernization and automation budgets increasing",
+      "Potential expansion into adjacent operational workflows"
+    ],
+    "threats": [
+      "Competition from SAP, Oracle, Workday, and Microsoft ecosystems",
+      "Enterprise security and governance concerns",
+      "Rapid commoditization of AI workflow automation"
+    ],
+    "strategicNotes": "Agentic automation for ERP workflows; Dossbot AI copilot; inventory/PO-to-POS.",
+    "source": "seed",
+    "capabilities": {
+      "enterprise_context_graph": "partial",
+      "cross_system_orchestration": "full",
+      "persistent_workflow_state": "partial",
+      "human_approvals": "partial",
+      "agentic_execution": "full",
+      "erp_crm_integration": "full",
+      "exception_handling": "full"
+    },
+    "workflows": {
+      "lead_to_order": "partial",
+      "order_to_cash": "partial",
+      "procure_to_pay": "direct",
+      "customer_onboarding": "partial",
+      "contract_operations": "partial",
+      "finance_operations": "direct",
+      "supply_chain": "partial",
+      "exception_management": "direct"
+    },
+    "positioning": {
+      "reasoning": 66,
+      "orchestration": 76,
+      "scope": 58,
+      "action": 70,
+      "context": 58
+    },
+    "contextScore": 79,
+    "sourceUrl": "https://www.doss.com/",
+    "confidence": "medium",
+    "evidenceNote": "Capabilities, workflow overlap and positioning are inferred from public category signals — verify before use in deals.",
+    "lastVerified": "2026-06-21",
+    "battlecard": {
+      "sells": "Adaptive ERP/Operations Cloud; AI-native inventory, procurement, finance ops.",
+      "buyers": "Manufacturing, eCommerce, growth-stage ops teams",
+      "whyChosen": "Focused, category-leading point solution in 2. AI layer / agentic workflow layer on top of ERP (also 6. Supply chain/inventory) with credible investor backing (Madrona, Premji Invest (co-led)).",
+      "strong": [
+        "Strong positioning in AI layer / agentic workflow layer on top of ERP (also supply chain/inventory)",
+        "Layer/plug-in for existing ERP or full modular replacement"
+      ],
+      "vyasaStronger": [
+        "Enterprise context graph spanning systems, not a single workflow",
+        "Cross-system orchestration above the stack (not a point tool)",
+        "Persistent workflow state + exception reasoning with human approvals"
+      ],
+      "objection": "“We already use a tool for this workflow — why add Vyasa?”",
+      "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
+      "discovery": [
+        "Which systems does this process span today (ERP, CRM, inbox, contracts)?",
+        "How are exceptions and approvals handled when the workflow breaks?",
+        "Do you need orchestration across departments, or a single point fix?"
+      ],
+      "doNotCompete": [
+        "Deep single-workflow UI polish",
+        "Commodity RPA scripting"
+      ],
+      "source": "seed"
+    }
+  },
+  {
+    "id": "light",
+    "name": "Light",
+    "category": "1. AI-native ERP or ERP replacement (also 3. Finance/accounting automation)",
+    "categoryGroup": 1,
+    "website": "https://light.inc/",
+    "founder": "",
+    "customerSegment": "Hypergrowth/scale-up companies",
+    "relevance": "High",
+    "overview": "AI-native finance platform; GL, accounting, reporting for hypergrowth.",
+    "established": "",
+    "fundingStage": "Series A",
+    "fundingAmount": 30,
+    "fundingYear": 2025,
+    "investors": "Balderton Capital",
+    "strengths": [
+      "Strong positioning in AI-native ERP or ERP replacement (also finance/accounting automation)",
+      "Full AI-native finance/ERP replacement",
+      "Backed by Balderton Capital"
+    ],
+    "weaknesses": [
+      "Heavy dependence on ERP integration quality",
+      "Likely enterprise implementation complexity",
+      "Many offerings still early-stage or scaling"
+    ],
+    "opportunities": [
+      "Growing enterprise demand for agentic AI workflows",
+      "ERP modernization and automation budgets increasing",
+      "Potential expansion into adjacent operational workflows"
+    ],
+    "threats": [
+      "Competition from SAP, Oracle, Workday, and Microsoft ecosystems",
+      "Enterprise security and governance concerns",
+      "Rapid commoditization of AI workflow automation"
+    ],
+    "strategicNotes": "AI for instant accounting, multi-jurisdiction; 30x growth post-launch.",
+    "source": "seed",
+    "capabilities": {
+      "enterprise_context_graph": "partial",
+      "cross_system_orchestration": "partial",
+      "persistent_workflow_state": "full",
+      "human_approvals": "full",
+      "agentic_execution": "partial",
+      "erp_crm_integration": "full",
+      "exception_handling": "partial"
+    },
+    "workflows": {
+      "lead_to_order": "partial",
+      "order_to_cash": "direct",
+      "procure_to_pay": "partial",
+      "customer_onboarding": "partial",
+      "contract_operations": "partial",
+      "finance_operations": "direct",
+      "supply_chain": "none",
+      "exception_management": "partial"
+    },
+    "positioning": {
+      "reasoning": 46,
+      "orchestration": 72,
+      "scope": 60,
+      "action": 65,
+      "context": 55
+    },
+    "contextScore": 71,
+    "sourceUrl": "https://light.inc/",
+    "confidence": "medium",
+    "evidenceNote": "Capabilities, workflow overlap and positioning are inferred from public category signals — verify before use in deals.",
+    "lastVerified": "2026-06-21",
+    "battlecard": {
+      "sells": "AI-native finance platform; GL, accounting, reporting for hypergrowth.",
+      "buyers": "Hypergrowth/scale-up companies",
+      "whyChosen": "Focused, category-leading point solution in 1. AI-native ERP or ERP replacement (also 3. Finance/accounting automation) with credible investor backing (Balderton Capital).",
+      "strong": [
+        "Strong positioning in AI-native ERP or ERP replacement (also finance/accounting automation)",
+        "Full AI-native finance/ERP replacement"
+      ],
+      "vyasaStronger": [
+        "Enterprise context graph spanning systems, not a single workflow",
+        "Cross-system orchestration above the stack (not a point tool)",
+        "Persistent workflow state + exception reasoning with human approvals"
+      ],
+      "objection": "“We already use a tool for this workflow — why add Vyasa?”",
+      "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
+      "discovery": [
+        "Which systems does this process span today (ERP, CRM, inbox, contracts)?",
+        "How are exceptions and approvals handled when the workflow breaks?",
+        "Do you need orchestration across departments, or a single point fix?"
+      ],
+      "doNotCompete": [
+        "Deep single-workflow UI polish",
+        "Commodity RPA scripting"
+      ],
+      "source": "seed"
+    }
+  },
+  {
+    "id": "coplane",
+    "name": "CoPlane",
+    "category": "2. AI layer / agentic workflow layer on top of ERP",
+    "categoryGroup": 2,
+    "website": "https://coplane.com/",
+    "founder": "",
+    "customerSegment": "Enterprises with legacy ERPs",
+    "relevance": "High",
+    "overview": "AI-native automation layer for ERPs; core finance/ops processes.",
+    "established": "",
+    "fundingStage": "Seed",
+    "fundingAmount": 14,
+    "fundingYear": 2025,
+    "investors": "Ribbit (led); Stripe, Optum Ventures",
+    "strengths": [
+      "Strong positioning in AI layer / agentic workflow layer on top of ERP",
+      "Adds agentic automation on top of existing ERPs",
+      "Backed by Ribbit (led); Stripe, Optum Ventures"
+    ],
+    "weaknesses": [
+      "Heavy dependence on ERP integration quality",
+      "Likely enterprise implementation complexity",
+      "Many offerings still early-stage or scaling"
+    ],
+    "opportunities": [
+      "Growing enterprise demand for agentic AI workflows",
+      "ERP modernization and automation budgets increasing",
+      "Potential expansion into adjacent operational workflows"
+    ],
+    "threats": [
+      "Competition from SAP, Oracle, Workday, and Microsoft ecosystems",
+      "Enterprise security and governance concerns",
+      "Rapid commoditization of AI workflow automation"
+    ],
+    "strategicNotes": "Automates invoice exceptions, order entry; transforms ERP-adjacent workflows.",
+    "source": "seed",
+    "capabilities": {
+      "enterprise_context_graph": "partial",
+      "cross_system_orchestration": "full",
+      "persistent_workflow_state": "partial",
+      "human_approvals": "partial",
+      "agentic_execution": "full",
+      "erp_crm_integration": "full",
+      "exception_handling": "full"
+    },
+    "workflows": {
+      "lead_to_order": "partial",
+      "order_to_cash": "partial",
+      "procure_to_pay": "direct",
+      "customer_onboarding": "partial",
+      "contract_operations": "partial",
+      "finance_operations": "direct",
+      "supply_chain": "partial",
+      "exception_management": "direct"
+    },
+    "positioning": {
+      "reasoning": 68,
+      "orchestration": 74,
+      "scope": 58,
+      "action": 70,
+      "context": 58
+    },
+    "contextScore": 79,
+    "sourceUrl": "https://coplane.com/",
+    "confidence": "medium",
+    "evidenceNote": "Capabilities, workflow overlap and positioning are inferred from public category signals — verify before use in deals.",
+    "lastVerified": "2026-06-21",
+    "battlecard": {
+      "sells": "AI-native automation layer for ERPs; core finance/ops processes.",
+      "buyers": "Enterprises with legacy ERPs",
+      "whyChosen": "Focused, category-leading point solution in 2. AI layer / agentic workflow layer on top of ERP with credible investor backing (Ribbit (led); Stripe, Optum Ventures).",
+      "strong": [
+        "Strong positioning in AI layer / agentic workflow layer on top of ERP",
+        "Adds agentic automation on top of existing ERPs"
+      ],
+      "vyasaStronger": [
+        "Enterprise context graph spanning systems, not a single workflow",
+        "Cross-system orchestration above the stack (not a point tool)",
+        "Persistent workflow state + exception reasoning with human approvals"
+      ],
+      "objection": "“We already use a tool for this workflow — why add Vyasa?”",
+      "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
+      "discovery": [
+        "Which systems does this process span today (ERP, CRM, inbox, contracts)?",
+        "How are exceptions and approvals handled when the workflow breaks?",
+        "Do you need orchestration across departments, or a single point fix?"
+      ],
+      "doNotCompete": [
+        "Deep single-workflow UI polish",
+        "Commodity RPA scripting"
+      ],
+      "source": "seed"
+    }
+  },
+  {
+    "id": "plato",
+    "name": "Plato",
+    "category": "2. AI layer / agentic workflow layer on top of ERP (wholesale focus)",
+    "categoryGroup": 2,
+    "website": "https://platoapp.ai/",
+    "founder": "",
+    "customerSegment": "Wholesale distributors",
+    "relevance": "High",
+    "overview": "AI Operating System for wholesalers; automates quoting, sales, ERP workflows.",
+    "established": "",
+    "fundingStage": "Seed",
+    "fundingAmount": 14.5,
+    "fundingYear": 2026,
+    "investors": "Atomico (led)",
+    "strengths": [
+      "Strong positioning in AI layer / agentic workflow layer on top of ERP (wholesale focus)",
+      "AI layer automating ERP data/workflows for distributors",
+      "Backed by Atomico (led)"
+    ],
+    "weaknesses": [
+      "Heavy dependence on ERP integration quality",
+      "Likely enterprise implementation complexity",
+      "Many offerings still early-stage or scaling"
+    ],
+    "opportunities": [
+      "Growing enterprise demand for agentic AI workflows",
+      "ERP modernization and automation budgets increasing",
+      "Potential expansion into adjacent operational workflows"
+    ],
+    "threats": [
+      "Competition from SAP, Oracle, Workday, and Microsoft ecosystems",
+      "Enterprise security and governance concerns",
+      "Rapid commoditization of AI workflow automation"
+    ],
+    "strategicNotes": "Agent-based AI for sales/quote/ERP automation; risk/opportunity detection.",
+    "source": "seed",
+    "capabilities": {
+      "enterprise_context_graph": "partial",
+      "cross_system_orchestration": "full",
+      "persistent_workflow_state": "partial",
+      "human_approvals": "partial",
+      "agentic_execution": "full",
+      "erp_crm_integration": "full",
+      "exception_handling": "full"
+    },
+    "workflows": {
+      "lead_to_order": "partial",
+      "order_to_cash": "partial",
+      "procure_to_pay": "direct",
+      "customer_onboarding": "partial",
+      "contract_operations": "partial",
+      "finance_operations": "direct",
+      "supply_chain": "partial",
+      "exception_management": "direct"
+    },
+    "positioning": {
+      "reasoning": 54,
+      "orchestration": 70,
+      "scope": 58,
+      "action": 70,
+      "context": 58
+    },
+    "contextScore": 79,
+    "sourceUrl": "https://platoapp.ai/",
+    "confidence": "medium",
+    "evidenceNote": "Capabilities, workflow overlap and positioning are inferred from public category signals — verify before use in deals.",
+    "lastVerified": "2026-06-21",
+    "battlecard": {
+      "sells": "AI Operating System for wholesalers; automates quoting, sales, ERP workflows.",
+      "buyers": "Wholesale distributors",
+      "whyChosen": "Focused, category-leading point solution in 2. AI layer / agentic workflow layer on top of ERP (wholesale focus) with credible investor backing (Atomico (led)).",
+      "strong": [
+        "Strong positioning in AI layer / agentic workflow layer on top of ERP (wholesale focus)",
+        "AI layer automating ERP data/workflows for distributors"
+      ],
+      "vyasaStronger": [
+        "Enterprise context graph spanning systems, not a single workflow",
+        "Cross-system orchestration above the stack (not a point tool)",
+        "Persistent workflow state + exception reasoning with human approvals"
+      ],
+      "objection": "“We already use a tool for this workflow — why add Vyasa?”",
+      "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
+      "discovery": [
+        "Which systems does this process span today (ERP, CRM, inbox, contracts)?",
+        "How are exceptions and approvals handled when the workflow breaks?",
+        "Do you need orchestration across departments, or a single point fix?"
+      ],
+      "doNotCompete": [
+        "Deep single-workflow UI polish",
+        "Commodity RPA scripting"
+      ],
+      "source": "seed"
+    }
+  },
+  {
+    "id": "zalos",
+    "name": "Zalos",
+    "category": "8. Enterprise agent platforms (ERP-specific)",
+    "categoryGroup": 8,
+    "website": "",
+    "founder": "",
+    "customerSegment": "CFO/finance teams",
+    "relevance": "High",
+    "overview": "Computer Agents for finance ops; operate ERP/finance systems like humans. (YC F25; no public site in results.)",
+    "established": "",
+    "fundingStage": "Seed",
+    "fundingAmount": 3.6,
+    "fundingYear": 2026,
+    "investors": "14 Peaks (led)",
+    "strengths": [
+      "Strong positioning in enterprise agent platforms (ERP-specific)",
+      "ERP computer agents automating end-to-end workflows",
+      "Backed by 14 Peaks (led)"
+    ],
+    "weaknesses": [
+      "Heavy dependence on ERP integration quality",
+      "Likely enterprise implementation complexity",
+      "Many offerings still early-stage or scaling"
+    ],
+    "opportunities": [
+      "Growing enterprise demand for agentic AI workflows",
+      "ERP modernization and automation budgets increasing",
+      "Potential expansion into adjacent operational workflows"
+    ],
+    "threats": [
+      "Competition from SAP, Oracle, Workday, and Microsoft ecosystems",
+      "Enterprise security and governance concerns",
+      "Rapid commoditization of AI workflow automation"
+    ],
+    "strategicNotes": "Agentic automation in fragmented finance/ERP systems.",
+    "source": "seed",
+    "capabilities": {
+      "enterprise_context_graph": "partial",
+      "cross_system_orchestration": "full",
+      "persistent_workflow_state": "partial",
+      "human_approvals": "partial",
+      "agentic_execution": "full",
+      "erp_crm_integration": "partial",
+      "exception_handling": "partial"
+    },
+    "workflows": {
+      "lead_to_order": "partial",
+      "order_to_cash": "partial",
+      "procure_to_pay": "partial",
+      "customer_onboarding": "partial",
+      "contract_operations": "partial",
+      "finance_operations": "partial",
+      "supply_chain": "partial",
+      "exception_management": "direct"
+    },
+    "positioning": {
+      "reasoning": 76,
+      "orchestration": 66,
+      "scope": 62,
+      "action": 66,
+      "context": 52
+    },
+    "contextScore": 64,
+    "sourceUrl": "",
+    "confidence": "medium",
+    "evidenceNote": "Capabilities, workflow overlap and positioning are inferred from public category signals — verify before use in deals.",
+    "lastVerified": "2026-06-21",
+    "battlecard": {
+      "sells": "Computer Agents for finance ops; operate ERP/finance systems like humans. (YC F25; no public site in results.)",
+      "buyers": "CFO/finance teams",
+      "whyChosen": "Focused, category-leading point solution in 8. Enterprise agent platforms (ERP-specific) with credible investor backing (14 Peaks (led)).",
+      "strong": [
+        "Strong positioning in enterprise agent platforms (ERP-specific)",
+        "ERP computer agents automating end-to-end workflows"
+      ],
+      "vyasaStronger": [
+        "Enterprise context graph spanning systems, not a single workflow",
+        "Cross-system orchestration above the stack (not a point tool)",
+        "Persistent workflow state + exception reasoning with human approvals"
+      ],
+      "objection": "“We already use a tool for this workflow — why add Vyasa?”",
+      "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
+      "discovery": [
+        "Which systems does this process span today (ERP, CRM, inbox, contracts)?",
+        "How are exceptions and approvals handled when the workflow breaks?",
+        "Do you need orchestration across departments, or a single point fix?"
+      ],
+      "doNotCompete": [
+        "Deep single-workflow UI polish",
+        "Commodity RPA scripting"
+      ],
+      "source": "seed"
+    }
+  },
+  {
+    "id": "paraglide",
+    "name": "Paraglide",
+    "category": "5. Order-to-cash / accounts receivable / collections",
+    "categoryGroup": 5,
+    "website": "https://www.paraglide.ai/",
+    "founder": "",
+    "customerSegment": "Companies with high late invoice rates",
+    "relevance": "High",
+    "overview": "AI agents for AR; conversational invoice chasing/automation.",
+    "established": "",
+    "fundingStage": "Seed",
+    "fundingAmount": 5,
+    "fundingYear": 2026,
+    "investors": "Bessemer, DN Capital (co-led)",
+    "strengths": [
+      "Strong positioning in order-to-cash / accounts receivable / collections",
+      "AI agents integrate with ERP/billing for O2C/AR",
+      "Backed by Bessemer, DN Capital (co-led)"
+    ],
+    "weaknesses": [
+      "Heavy dependence on ERP integration quality",
+      "Likely enterprise implementation complexity",
+      "Many offerings still early-stage or scaling"
+    ],
+    "opportunities": [
+      "Growing enterprise demand for agentic AI workflows",
+      "ERP modernization and automation budgets increasing",
+      "Potential expansion into adjacent operational workflows"
+    ],
+    "threats": [
+      "Competition from SAP, Oracle, Workday, and Microsoft ecosystems",
+      "Enterprise security and governance concerns",
+      "Rapid commoditization of AI workflow automation"
+    ],
+    "strategicNotes": "Agentic AR workflows in existing ERP stack.",
+    "source": "seed",
+    "capabilities": {
+      "enterprise_context_graph": "none",
+      "cross_system_orchestration": "partial",
+      "persistent_workflow_state": "partial",
+      "human_approvals": "partial",
+      "agentic_execution": "partial",
+      "erp_crm_integration": "partial",
+      "exception_handling": "partial"
+    },
+    "workflows": {
+      "lead_to_order": "partial",
+      "order_to_cash": "direct",
+      "procure_to_pay": "none",
+      "customer_onboarding": "partial",
+      "contract_operations": "partial",
+      "finance_operations": "partial",
+      "supply_chain": "none",
+      "exception_management": "partial"
+    },
+    "positioning": {
+      "reasoning": 36,
+      "orchestration": 22,
+      "scope": 35,
+      "action": 50,
+      "context": 35
+    },
+    "contextScore": 43,
+    "sourceUrl": "https://www.paraglide.ai/",
+    "confidence": "medium",
+    "evidenceNote": "Capabilities, workflow overlap and positioning are inferred from public category signals — verify before use in deals.",
+    "lastVerified": "2026-06-21",
+    "battlecard": {
+      "sells": "AI agents for AR; conversational invoice chasing/automation.",
+      "buyers": "Companies with high late invoice rates",
+      "whyChosen": "Focused, category-leading point solution in 5. Order-to-cash / accounts receivable / collections with credible investor backing (Bessemer, DN Capital (co-led)).",
+      "strong": [
+        "Strong positioning in order-to-cash / accounts receivable / collections",
+        "AI agents integrate with ERP/billing for O2C/AR"
+      ],
+      "vyasaStronger": [
+        "Enterprise context graph spanning systems, not a single workflow",
+        "Cross-system orchestration above the stack (not a point tool)",
+        "Persistent workflow state + exception reasoning with human approvals"
+      ],
+      "objection": "“We already use a tool for this workflow — why add Vyasa?”",
+      "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
+      "discovery": [
+        "Which systems does this process span today (ERP, CRM, inbox, contracts)?",
+        "How are exceptions and approvals handled when the workflow breaks?",
+        "Do you need orchestration across departments, or a single point fix?"
+      ],
+      "doNotCompete": [
+        "Deep single-workflow UI polish",
+        "Commodity RPA scripting"
+      ],
+      "source": "seed"
+    }
+  },
+  {
+    "id": "zip",
+    "name": "Zip",
+    "category": "4. Procurement / procure-to-pay / intake-to-pay",
+    "categoryGroup": 4,
+    "website": "https://ziphq.com/",
+    "founder": "",
+    "customerSegment": "Enterprise/mid-market/startups",
+    "relevance": "Medium-High",
+    "overview": "AI procurement orchestration; intake-to-procure + P2P.",
+    "established": "",
+    "fundingStage": "Undisclosed",
+    "fundingAmount": 0,
+    "fundingYear": null,
+    "investors": "N/A (seed list verified relevance)",
+    "strengths": [
+      "Strong positioning in procurement / procure-to-pay / intake-to-pay",
+      "AI layer for procurement/P2P automation with ERP",
+      "Gartner MQ Visionary for source-to-pay"
+    ],
+    "weaknesses": [
+      "Heavy dependence on ERP integration quality",
+      "Likely enterprise implementation complexity",
+      "Many offerings still early-stage or scaling"
+    ],
+    "opportunities": [
+      "Growing enterprise demand for agentic AI workflows",
+      "ERP modernization and automation budgets increasing",
+      "Potential expansion into adjacent operational workflows"
+    ],
+    "threats": [
+      "Competition from SAP, Oracle, Workday, and Microsoft ecosystems",
+      "Enterprise security and governance concerns",
+      "Rapid commoditization of AI workflow automation"
+    ],
+    "strategicNotes": "AI for P2P; Gartner MQ Visionary for source-to-pay. Older but relevant; no 2024-26 mega-round in searches.",
+    "source": "seed",
+    "capabilities": {
+      "enterprise_context_graph": "partial",
+      "cross_system_orchestration": "partial",
+      "persistent_workflow_state": "partial",
+      "human_approvals": "full",
+      "agentic_execution": "full",
+      "erp_crm_integration": "full",
+      "exception_handling": "partial"
+    },
+    "workflows": {
+      "lead_to_order": "partial",
+      "order_to_cash": "none",
+      "procure_to_pay": "direct",
+      "customer_onboarding": "none",
+      "contract_operations": "partial",
+      "finance_operations": "partial",
+      "supply_chain": "direct",
+      "exception_management": "partial"
+    },
+    "positioning": {
+      "reasoning": 62,
+      "orchestration": 50,
+      "scope": 50,
+      "action": 68,
+      "context": 50
+    },
+    "contextScore": 71,
+    "sourceUrl": "https://ziphq.com/",
+    "confidence": "medium",
+    "evidenceNote": "Capabilities, workflow overlap and positioning are inferred from public category signals — verify before use in deals.",
+    "lastVerified": "2026-06-21",
+    "battlecard": {
+      "sells": "AI procurement orchestration; intake-to-procure + P2P.",
+      "buyers": "Enterprise/mid-market/startups",
+      "whyChosen": "Focused, category-leading point solution in 4. Procurement / procure-to-pay / intake-to-pay with credible investor backing (N/A (seed list verified relevance)).",
+      "strong": [
+        "Strong positioning in procurement / procure-to-pay / intake-to-pay",
+        "AI layer for procurement/P2P automation with ERP"
+      ],
+      "vyasaStronger": [
+        "Enterprise context graph spanning systems, not a single workflow",
+        "Cross-system orchestration above the stack (not a point tool)",
+        "Persistent workflow state + exception reasoning with human approvals"
+      ],
+      "objection": "“We already use a tool for this workflow — why add Vyasa?”",
+      "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
+      "discovery": [
+        "Which systems does this process span today (ERP, CRM, inbox, contracts)?",
+        "How are exceptions and approvals handled when the workflow breaks?",
+        "Do you need orchestration across departments, or a single point fix?"
+      ],
+      "doNotCompete": [
+        "Deep single-workflow UI polish",
+        "Commodity RPA scripting"
+      ],
+      "source": "seed"
+    }
+  },
+  {
+    "id": "sola",
+    "name": "Sola",
+    "category": "Not specified",
+    "categoryGroup": 0,
+    "website": "https://www.sola.ai/",
+    "founder": "",
+    "customerSegment": "Not specified",
+    "relevance": "Not specified",
+    "overview": "Not specified.",
+    "established": "",
+    "fundingStage": "Not specified",
+    "fundingAmount": 0,
+    "fundingYear": null,
+    "investors": "Not specified",
+    "strengths": [],
+    "weaknesses": [
+      "Heavy dependence on ERP integration quality",
+      "Likely enterprise implementation complexity",
+      "Many offerings still early-stage or scaling"
+    ],
+    "opportunities": [
+      "Growing enterprise demand for agentic AI workflows",
+      "ERP modernization and automation budgets increasing",
+      "Potential expansion into adjacent operational workflows"
+    ],
+    "threats": [
+      "Competition from SAP, Oracle, Workday, and Microsoft ecosystems",
+      "Enterprise security and governance concerns",
+      "Rapid commoditization of AI workflow automation"
+    ],
+    "strategicNotes": "Not specified. Flagged for deeper research.",
+    "source": "seed",
+    "capabilities": {
+      "enterprise_context_graph": "none",
+      "cross_system_orchestration": "none",
+      "persistent_workflow_state": "none",
+      "human_approvals": "none",
+      "agentic_execution": "none",
+      "erp_crm_integration": "none",
+      "exception_handling": "none"
+    },
+    "workflows": {
+      "lead_to_order": "none",
+      "order_to_cash": "none",
+      "procure_to_pay": "none",
+      "customer_onboarding": "none",
+      "contract_operations": "none",
+      "finance_operations": "none",
+      "supply_chain": "none",
+      "exception_management": "none"
+    },
+    "positioning": {
+      "reasoning": 30,
+      "orchestration": 30,
+      "scope": 30,
+      "action": 30,
+      "context": 25
+    },
+    "contextScore": 0,
+    "sourceUrl": "https://www.sola.ai/",
+    "confidence": "low",
+    "evidenceNote": "Capabilities, workflow overlap and positioning are inferred from public category signals — verify before use in deals.",
+    "lastVerified": "2026-06-21",
+    "battlecard": {
+      "sells": "Not specified.",
+      "buyers": "Not specified",
+      "whyChosen": "Focused, category-leading point solution in Not specified with credible investor backing (Not specified).",
+      "strong": [
+        "Established positioning"
+      ],
+      "vyasaStronger": [
+        "Enterprise context graph spanning systems, not a single workflow",
+        "Cross-system orchestration above the stack (not a point tool)",
+        "Persistent workflow state + exception reasoning with human approvals"
+      ],
+      "objection": "“We already use a tool for this workflow — why add Vyasa?”",
+      "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
+      "discovery": [
+        "Which systems does this process span today (ERP, CRM, inbox, contracts)?",
+        "How are exceptions and approvals handled when the workflow breaks?",
+        "Do you need orchestration across departments, or a single point fix?"
+      ],
+      "doNotCompete": [
+        "Deep single-workflow UI polish",
+        "Commodity RPA scripting"
+      ],
+      "source": "seed"
+    }
+  },
+  {
+    "id": "qomplement",
+    "name": "Qomplement",
+    "category": "Not specified",
+    "categoryGroup": 0,
+    "website": "https://qomplement.com/",
+    "founder": "",
+    "customerSegment": "Not specified",
+    "relevance": "Not specified",
+    "overview": "Not specified.",
+    "established": "",
+    "fundingStage": "Not specified",
+    "fundingAmount": 0,
+    "fundingYear": null,
+    "investors": "Not specified",
+    "strengths": [],
+    "weaknesses": [
+      "Heavy dependence on ERP integration quality",
+      "Likely enterprise implementation complexity",
+      "Many offerings still early-stage or scaling"
+    ],
+    "opportunities": [
+      "Growing enterprise demand for agentic AI workflows",
+      "ERP modernization and automation budgets increasing",
+      "Potential expansion into adjacent operational workflows"
+    ],
+    "threats": [
+      "Competition from SAP, Oracle, Workday, and Microsoft ecosystems",
+      "Enterprise security and governance concerns",
+      "Rapid commoditization of AI workflow automation"
+    ],
+    "strategicNotes": "Not specified. Flagged for deeper research.",
+    "source": "seed",
+    "capabilities": {
+      "enterprise_context_graph": "none",
+      "cross_system_orchestration": "none",
+      "persistent_workflow_state": "none",
+      "human_approvals": "none",
+      "agentic_execution": "none",
+      "erp_crm_integration": "none",
+      "exception_handling": "none"
+    },
+    "workflows": {
+      "lead_to_order": "none",
+      "order_to_cash": "none",
+      "procure_to_pay": "none",
+      "customer_onboarding": "none",
+      "contract_operations": "none",
+      "finance_operations": "none",
+      "supply_chain": "none",
+      "exception_management": "none"
+    },
+    "positioning": {
+      "reasoning": 30,
+      "orchestration": 30,
+      "scope": 30,
+      "action": 30,
+      "context": 25
+    },
+    "contextScore": 0,
+    "sourceUrl": "https://qomplement.com/",
+    "confidence": "low",
+    "evidenceNote": "Capabilities, workflow overlap and positioning are inferred from public category signals — verify before use in deals.",
+    "lastVerified": "2026-06-21",
+    "battlecard": {
+      "sells": "Not specified.",
+      "buyers": "Not specified",
+      "whyChosen": "Focused, category-leading point solution in Not specified with credible investor backing (Not specified).",
+      "strong": [
+        "Established positioning"
+      ],
+      "vyasaStronger": [
+        "Enterprise context graph spanning systems, not a single workflow",
+        "Cross-system orchestration above the stack (not a point tool)",
+        "Persistent workflow state + exception reasoning with human approvals"
+      ],
+      "objection": "“We already use a tool for this workflow — why add Vyasa?”",
+      "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
+      "discovery": [
+        "Which systems does this process span today (ERP, CRM, inbox, contracts)?",
+        "How are exceptions and approvals handled when the workflow breaks?",
+        "Do you need orchestration across departments, or a single point fix?"
+      ],
+      "doNotCompete": [
+        "Deep single-workflow UI polish",
+        "Commodity RPA scripting"
+      ],
+      "source": "seed"
+    }
+  },
+  {
+    "id": "haladir",
+    "name": "Haladir",
+    "category": "Not specified",
+    "categoryGroup": 0,
+    "website": "https://www.haladir.com/",
+    "founder": "",
+    "customerSegment": "Not specified",
+    "relevance": "Not specified",
+    "overview": "Not specified.",
+    "established": "",
+    "fundingStage": "Not specified",
+    "fundingAmount": 0,
+    "fundingYear": null,
+    "investors": "Not specified",
+    "strengths": [],
+    "weaknesses": [
+      "Heavy dependence on ERP integration quality",
+      "Likely enterprise implementation complexity",
+      "Many offerings still early-stage or scaling"
+    ],
+    "opportunities": [
+      "Growing enterprise demand for agentic AI workflows",
+      "ERP modernization and automation budgets increasing",
+      "Potential expansion into adjacent operational workflows"
+    ],
+    "threats": [
+      "Competition from SAP, Oracle, Workday, and Microsoft ecosystems",
+      "Enterprise security and governance concerns",
+      "Rapid commoditization of AI workflow automation"
+    ],
+    "strategicNotes": "Not specified. Flagged for deeper research.",
+    "source": "seed",
+    "capabilities": {
+      "enterprise_context_graph": "none",
+      "cross_system_orchestration": "none",
+      "persistent_workflow_state": "none",
+      "human_approvals": "none",
+      "agentic_execution": "none",
+      "erp_crm_integration": "none",
+      "exception_handling": "none"
+    },
+    "workflows": {
+      "lead_to_order": "none",
+      "order_to_cash": "none",
+      "procure_to_pay": "none",
+      "customer_onboarding": "none",
+      "contract_operations": "none",
+      "finance_operations": "none",
+      "supply_chain": "none",
+      "exception_management": "none"
+    },
+    "positioning": {
+      "reasoning": 30,
+      "orchestration": 30,
+      "scope": 30,
+      "action": 30,
+      "context": 25
+    },
+    "contextScore": 0,
+    "sourceUrl": "https://www.haladir.com/",
+    "confidence": "low",
+    "evidenceNote": "Capabilities, workflow overlap and positioning are inferred from public category signals — verify before use in deals.",
+    "lastVerified": "2026-06-21",
+    "battlecard": {
+      "sells": "Not specified.",
+      "buyers": "Not specified",
+      "whyChosen": "Focused, category-leading point solution in Not specified with credible investor backing (Not specified).",
+      "strong": [
+        "Established positioning"
+      ],
+      "vyasaStronger": [
+        "Enterprise context graph spanning systems, not a single workflow",
+        "Cross-system orchestration above the stack (not a point tool)",
+        "Persistent workflow state + exception reasoning with human approvals"
+      ],
+      "objection": "“We already use a tool for this workflow — why add Vyasa?”",
+      "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
+      "discovery": [
+        "Which systems does this process span today (ERP, CRM, inbox, contracts)?",
+        "How are exceptions and approvals handled when the workflow breaks?",
+        "Do you need orchestration across departments, or a single point fix?"
+      ],
+      "doNotCompete": [
+        "Deep single-workflow UI polish",
+        "Commodity RPA scripting"
+      ],
+      "source": "seed"
+    }
+  }
+]

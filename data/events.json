@@ -1,0 +1,145 @@
+[
+  {
+    "id": "ev1",
+    "competitorId": "lio",
+    "competitor": "Lio",
+    "date": "2026-01-01",
+    "type": "Funding",
+    "title": "Lio raised Series A ($30M)",
+    "detail": "a16z (led); SV Angels, Harry Stebbings, YC",
+    "source": "https://lio.ai/",
+    "impact": "More capital to deepen ERP integrations and expand into adjacent workflows — monitor for category expansion toward orchestration."
+  },
+  {
+    "id": "ev2",
+    "competitorId": "didero",
+    "competitor": "Didero",
+    "date": "2026-01-01",
+    "type": "Funding",
+    "title": "Didero raised Series A ($30M)",
+    "detail": "Chemistry + Headline (co-led); M12 (Microsoft)",
+    "source": "https://www.didero.ai/",
+    "impact": "More capital to deepen ERP integrations and expand into adjacent workflows — monitor for category expansion toward orchestration."
+  },
+  {
+    "id": "ev3",
+    "competitorId": "nominal",
+    "competitor": "Nominal",
+    "date": "2025-01-01",
+    "type": "Funding",
+    "title": "Nominal raised Series A ($20M)",
+    "detail": "Next47 (led); Workday Ventures",
+    "source": "https://www.nominal.so/",
+    "impact": "More capital to deepen ERP integrations and expand into adjacent workflows — monitor for category expansion toward orchestration."
+  },
+  {
+    "id": "ev4",
+    "competitorId": "nexus",
+    "competitor": "Nexus",
+    "date": "2026-01-01",
+    "type": "Funding",
+    "title": "Nexus raised Seed ($4.3M)",
+    "detail": "General Catalyst (led); YC + others",
+    "source": "https://agent.nexus/",
+    "impact": "More capital to deepen ERP integrations and expand into adjacent workflows — monitor for category expansion toward orchestration."
+  },
+  {
+    "id": "ev5",
+    "competitorId": "dualentry",
+    "competitor": "DualEntry",
+    "date": "2025-01-01",
+    "type": "Funding",
+    "title": "DualEntry raised Series A ($90M)",
+    "detail": "Lightspeed, Khosla Ventures",
+    "source": "https://www.dualentry.com/",
+    "impact": "More capital to deepen ERP integrations and expand into adjacent workflows — monitor for category expansion toward orchestration."
+  },
+  {
+    "id": "ev6",
+    "competitorId": "rillet",
+    "competitor": "Rillet",
+    "date": "2025-01-01",
+    "type": "Funding",
+    "title": "Rillet raised Series B ($70M)",
+    "detail": "a16z, ICONIQ (co-led)",
+    "source": "https://www.rillet.com/",
+    "impact": "More capital to deepen ERP integrations and expand into adjacent workflows — monitor for category expansion toward orchestration."
+  },
+  {
+    "id": "ev7",
+    "competitorId": "campfire",
+    "competitor": "Campfire",
+    "date": "2025-01-01",
+    "type": "Funding",
+    "title": "Campfire raised Series B ($65M)",
+    "detail": "Accel, Ribbit (co-led)",
+    "source": "https://campfire.ai/",
+    "impact": "More capital to deepen ERP integrations and expand into adjacent workflows — monitor for category expansion toward orchestration."
+  },
+  {
+    "id": "ev8",
+    "competitorId": "doss",
+    "competitor": "Doss",
+    "date": "2026-01-01",
+    "type": "Funding",
+    "title": "Doss raised Series B ($55M)",
+    "detail": "Madrona, Premji Invest (co-led)",
+    "source": "https://www.doss.com/",
+    "impact": "More capital to deepen ERP integrations and expand into adjacent workflows — monitor for category expansion toward orchestration."
+  },
+  {
+    "id": "ev9",
+    "competitorId": "light",
+    "competitor": "Light",
+    "date": "2025-01-01",
+    "type": "Funding",
+    "title": "Light raised Series A ($30M)",
+    "detail": "Balderton Capital",
+    "source": "https://light.inc/",
+    "impact": "More capital to deepen ERP integrations and expand into adjacent workflows — monitor for category expansion toward orchestration."
+  },
+  {
+    "id": "ev10",
+    "competitorId": "coplane",
+    "competitor": "CoPlane",
+    "date": "2025-01-01",
+    "type": "Funding",
+    "title": "CoPlane raised Seed ($14M)",
+    "detail": "Ribbit (led); Stripe, Optum Ventures",
+    "source": "https://coplane.com/",
+    "impact": "More capital to deepen ERP integrations and expand into adjacent workflows — monitor for category expansion toward orchestration."
+  },
+  {
+    "id": "ev11",
+    "competitorId": "plato",
+    "competitor": "Plato",
+    "date": "2026-01-01",
+    "type": "Funding",
+    "title": "Plato raised Seed ($14.5M)",
+    "detail": "Atomico (led)",
+    "source": "https://platoapp.ai/",
+    "impact": "More capital to deepen ERP integrations and expand into adjacent workflows — monitor for category expansion toward orchestration."
+  },
+  {
+    "id": "ev12",
+    "competitorId": "zalos",
+    "competitor": "Zalos",
+    "date": "2026-01-01",
+    "type": "Funding",
+    "title": "Zalos raised Seed ($3.6M)",
+    "detail": "14 Peaks (led)",
+    "source": "",
+    "impact": "More capital to deepen ERP integrations and expand into adjacent workflows — monitor for category expansion toward orchestration."
+  },
+  {
+    "id": "ev13",
+    "competitorId": "paraglide",
+    "competitor": "Paraglide",
+    "date": "2026-01-01",
+    "type": "Funding",
+    "title": "Paraglide raised Seed ($5M)",
+    "detail": "Bessemer, DN Capital (co-led)",
+    "source": "https://www.paraglide.ai/",
+    "impact": "More capital to deepen ERP integrations and expand into adjacent workflows — monitor for category expansion toward orchestration."
+  }
+]
