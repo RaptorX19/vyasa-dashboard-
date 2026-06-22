@@ -121,7 +121,6 @@ function Overview({ items, labels, events, setView }) {
     <div>
       <div className="page-head">
         <h1>Competitive Landscape <em>Intelligence</em></h1>
-        <p>The reasoning &amp; orchestration layer above the stack — tracking {total} competitors across AI-native ERP, agentic workflows, procurement, and finance automation.</p>
       </div>
 
       <div className="stat-grid">
