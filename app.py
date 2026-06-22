@@ -2,7 +2,7 @@
 
 Serves a single-page dashboard plus a JSON API for managing competitors
 and an AI-powered discovery endpoint that finds new competitors via the
-Claude API with web search.
+OpenAI API with web search.
 """
 import json
 import os
@@ -13,6 +13,16 @@ from pathlib import Path
 from flask import Flask, jsonify, request, send_from_directory
 
 BASE_DIR = Path(__file__).resolve().parent
+
+# Load a local .env (gitignored) so OPENAI_API_KEY etc. are available without
+# exporting them in the shell. No-op if python-dotenv isn't installed.
+try:
+    from dotenv import load_dotenv
+
+    load_dotenv(BASE_DIR / ".env")
+except ImportError:
+    pass
+
 DATA_FILE = BASE_DIR / "data" / "competitors.json"
 EVENTS_FILE = BASE_DIR / "data" / "events.json"
 WINLOSS_FILE = BASE_DIR / "data" / "winloss.json"
@@ -163,7 +173,7 @@ def meta():
             "workflowLabels": WORKFLOW_LABELS,
             "positioningAxes": POSITIONING_AXES,
             "vyasa": VYASA_BENCHMARK,
-            "aiEnabled": bool(os.environ.get("ANTHROPIC_API_KEY")),
+            "aiEnabled": bool(os.environ.get("OPENAI_API_KEY")),
             "vyasaContext": VYASA_CONTEXT,
         }
     )
@@ -246,18 +256,20 @@ def delete_competitor(cid):
 
 @app.route("/api/discover", methods=["POST"])
 def discover():
-    """Use Claude + web search to find new competitors not already tracked."""
-    api_key = os.environ.get("ANTHROPIC_API_KEY")
-    if not api_key:
+    """Use OpenAI + web search to find new competitors not already tracked."""
+    client, cerr = _ai_client()
+    if cerr == "no_key":
         return (
             jsonify(
                 {
-                    "error": "ANTHROPIC_API_KEY not set. Add it to your environment "
+                    "error": "OPENAI_API_KEY not set. Add it to your environment "
                     "to enable AI discovery."
                 }
             ),
             400,
         )
+    if cerr:
+        return jsonify({"error": cerr}), 500
 
     body = request.get_json(silent=True) or {}
     focus = (body.get("focus") or "").strip()
@@ -266,13 +278,6 @@ def discover():
 
     items = load_data()
     existing = sorted(c["name"] for c in items)
-
-    try:
-        import anthropic
-    except ImportError:
-        return jsonify({"error": "anthropic package not installed"}), 500
-
-    client = anthropic.Anthropic(api_key=api_key)
 
     schema_hint = (
         '{"competitors": [{"name": str, "category": str, "categoryGroup": '
@@ -301,19 +306,9 @@ def discover():
         f"fences):\n{schema_hint}"
     )
 
-    try:
-        resp = client.messages.create(
-            model="claude-opus-4-7",
-            max_tokens=4096,
-            tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 6}],
-            messages=[{"role": "user", "content": prompt}],
-        )
-    except Exception as e:  # noqa: BLE001 - surface API errors to the UI
-        return jsonify({"error": f"AI request failed: {e}"}), 502
-
-    text = "".join(
-        block.text for block in resp.content if getattr(block, "type", "") == "text"
-    )
+    text, aerr = _openai_text(client, prompt, use_search=True, max_tokens=4096)
+    if aerr:
+        return jsonify({"error": aerr}), 502
 
     data = _extract_json(text)
     if data is None:
@@ -397,26 +392,53 @@ def delete_winloss(wid):
     return jsonify({"deleted": wid})
 
 
-# ---------------- AI helper ----------------
-def _call_claude_json(prompt, use_search=False, max_tokens=3000):
-    """Call Claude and return parsed JSON, or (None, error)."""
-    api_key = os.environ.get("ANTHROPIC_API_KEY")
+# ---------------- AI helper (OpenAI) ----------------
+def _ai_client():
+    """Return an OpenAI client, or (None, error). Error is 'no_key' when the
+    OPENAI_API_KEY env var is unset so callers can degrade gracefully."""
+    api_key = os.environ.get("OPENAI_API_KEY")
     if not api_key:
         return None, "no_key"
     try:
-        import anthropic
+        import openai
     except ImportError:
-        return None, "anthropic package not installed"
-    client = anthropic.Anthropic(api_key=api_key)
-    kwargs = {"model": "claude-opus-4-7", "max_tokens": max_tokens,
-              "messages": [{"role": "user", "content": prompt}]}
-    if use_search:
-        kwargs["tools"] = [{"type": "web_search_20250305", "name": "web_search", "max_uses": 5}]
-    try:
-        resp = client.messages.create(**kwargs)
-    except Exception as e:  # noqa: BLE001
-        return None, f"AI request failed: {e}"
-    text = "".join(b.text for b in resp.content if getattr(b, "type", "") == "text")
+        return None, "openai package not installed"
+    return openai.OpenAI(api_key=api_key), None
+
+
+def _openai_text(client, prompt, use_search=False, max_tokens=3000):
+    """Run one Responses API call and return (text, error). When use_search is
+    set, the built-in web_search tool is attached; we fall back across the two
+    tool-type names ('web_search' / 'web_search_preview') for compatibility."""
+    model = os.environ.get("OPENAI_MODEL", "gpt-4o")
+    tool_variants = (
+        [[{"type": "web_search"}], [{"type": "web_search_preview"}]]
+        if use_search else [None]
+    )
+    last_err = None
+    for tools in tool_variants:
+        kwargs = {"model": model, "input": prompt, "max_output_tokens": max_tokens}
+        if tools is not None:
+            kwargs["tools"] = tools
+        try:
+            resp = client.responses.create(**kwargs)
+            return resp.output_text, None
+        except Exception as e:  # noqa: BLE001
+            last_err = e
+            # Only retry the alternate tool name when the error looks tool-related.
+            if not use_search or "tool" not in str(e).lower():
+                break
+    return None, f"AI request failed: {last_err}"
+
+
+def _call_ai_json(prompt, use_search=False, max_tokens=3000):
+    """Call OpenAI and return parsed JSON, or (None, error)."""
+    client, err = _ai_client()
+    if err:
+        return None, err
+    text, err = _openai_text(client, prompt, use_search=use_search, max_tokens=max_tokens)
+    if err:
+        return None, err
     data = _extract_json(text)
     if data is None:
         return None, "Could not parse AI response"
@@ -441,7 +463,7 @@ def insights():
         '"body": str, "whyItMatters": str, "confidence": "high"|"medium"|"low"}]}. '
         "Produce 6-8 specific, actionable insights grounded in the data above."
     )
-    data, err = _call_claude_json(prompt)
+    data, err = _call_ai_json(prompt)
     if err == "no_key":
         return jsonify({"insights": _static_insights(items), "source": "static"})
     if err:
@@ -483,14 +505,22 @@ def gen_battlecard(cid):
         return jsonify({"error": "not found"}), 404
     prompt = (
         f"{VYASA_CONTEXT}\n\nCompetitor profile JSON:\n{json.dumps(comp)}\n\n"
-        "Write a GTM battlecard for Vyasa sellers facing this competitor. Use web search to "
-        "verify current facts. Return ONLY JSON (no fences) with keys: sells, buyers, whyChosen, "
-        "strong (array), vyasaStronger (array), objection, response, discovery (array), "
-        "doNotCompete (array)."
+        f"Write a GTM battlecard for Vyasa sellers facing the competitor named "
+        f"\"{comp.get('name')}\". Use web search to verify current facts. Return ONLY JSON "
+        "(no fences) with these keys, each from the stated perspective:\n"
+        f"- sells: what {comp.get('name')} (the COMPETITOR, not Vyasa) sells, in one or two sentences\n"
+        f"- buyers: who buys {comp.get('name')}'s product (their target customers)\n"
+        f"- whyChosen: why customers pick {comp.get('name')} today\n"
+        f"- strong (array): where {comp.get('name')} is genuinely strong\n"
+        "- vyasaStronger (array): where VYASA is stronger than this competitor\n"
+        f"- objection: a real objection a buyer raises that favors {comp.get('name')}\n"
+        "- response: how a Vyasa rep should answer that objection\n"
+        "- discovery (array): discovery questions that surface Vyasa's advantage\n"
+        "- doNotCompete (array): areas where Vyasa should not try to compete head-on"
     )
-    data, err = _call_claude_json(prompt, use_search=True, max_tokens=2000)
+    data, err = _call_ai_json(prompt, use_search=True, max_tokens=2000)
     if err == "no_key":
-        return jsonify({"error": "ANTHROPIC_API_KEY not set — using the seeded battlecard."}), 400
+        return jsonify({"error": "OPENAI_API_KEY not set — using the seeded battlecard."}), 400
     if err:
         return jsonify({"error": err}), 502
     data["source"] = "ai"
@@ -519,9 +549,9 @@ def account_intel():
         "likelyCompetitors (array of {name, why}), stack (array of strings), painPoints (array), "
         "relevantUseCases (array), displacementVsCoexist (string), recommendedPositioning (string)."
     )
-    data, err = _call_claude_json(prompt, use_search=True, max_tokens=2500)
+    data, err = _call_ai_json(prompt, use_search=True, max_tokens=2500)
     if err == "no_key":
-        return jsonify({"error": "ANTHROPIC_API_KEY not set. Account intelligence needs the AI key."}), 400
+        return jsonify({"error": "OPENAI_API_KEY not set. Account intelligence needs the AI key."}), 400
     if err:
         return jsonify({"error": err}), 502
     return jsonify(data)

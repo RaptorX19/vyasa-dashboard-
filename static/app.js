@@ -425,7 +425,7 @@ function Battlecards({ items, aiEnabled, onUpdated }) {
         <button className="btn accent" disabled={!aiEnabled || loading} onClick={regen}>{loading ? <><span className="spinner"></span> Generating…</> : "✦ Regenerate with AI"}</button>
         {comp && comp.battlecard && <span className={`pill src-${comp.battlecard.source === "ai" ? "ai-discovered" : "seed"}`}>{comp.battlecard.source === "ai" ? "AI-generated" : "Seeded"}</span>}
       </div>
-      {!aiEnabled && <div className="note warn">Showing seeded battlecards. Set <code>ANTHROPIC_API_KEY</code> to regenerate with live web research.</div>}
+      {!aiEnabled && <div className="note warn">Showing seeded battlecards. Set <code>OPENAI_API_KEY</code> to regenerate with live web research.</div>}
       {error && <div className="note err">{error}</div>}
       {!bc ? <div className="empty">No battlecard for this competitor yet.</div> : (
         <div className="panel">
@@ -473,7 +473,7 @@ function Accounts({ aiEnabled }) {
         <h1>Account <em>Intelligence</em></h1>
         <p>Research a target account: which competitors are likely incumbents, the systems in play, and how Vyasa should be positioned to win it.</p>
       </div>
-      {!aiEnabled && <div className="note warn">Account intelligence needs live web research. Set <code>ANTHROPIC_API_KEY</code> and restart the server.</div>}
+      {!aiEnabled && <div className="note warn">Account intelligence needs live web research. Set <code>OPENAI_API_KEY</code> and restart the server.</div>}
       <div className="discover-bar">
         <div className="field" style={{ flex: 1, minWidth: 240 }}><label>Target account</label><input className="search" placeholder="e.g. Acme Manufacturing" value={account} onChange={(e) => setAccount(e.target.value)} /></div>
         <div className="field" style={{ flex: 1, minWidth: 240 }}><label>Known systems (optional)</label><input className="search" placeholder="SAP, Salesforce, Coupa…" value={systems} onChange={(e) => setSystems(e.target.value)} /></div>
@@ -666,7 +666,7 @@ function Insights({ aiEnabled }) {
         <button className="btn accent" disabled={loading} onClick={run}>{loading ? <><span className="spinner"></span> Analyzing…</> : "✦ Regenerate insights"}</button>
         {data && <span className={`pill src-${data.source === "ai" ? "ai-discovered" : "seed"}`}>{data.source === "ai" ? "AI-generated" : "Static fallback"}</span>}
       </div>
-      {!aiEnabled && <div className="note warn">Showing static insights. Set <code>ANTHROPIC_API_KEY</code> for live AI-generated strategic analysis.</div>}
+      {!aiEnabled && <div className="note warn">Showing static insights. Set <code>OPENAI_API_KEY</code> for live AI-generated strategic analysis.</div>}
       {error && <div className="note err">{error}</div>}
       {loading && !data && <div className="empty"><span className="spinner dark"></span> Generating insights…</div>}
       {data && (data.insights || []).map((ins, i) => (
@@ -845,7 +845,7 @@ function DiscoverModal({ aiEnabled, onClose, onImported }) {
           <button className="x" onClick={onClose}>×</button>
         </div>
         <div className="modal-body">
-          {!aiEnabled && <div className="note warn">AI discovery is offline. Set the <code>ANTHROPIC_API_KEY</code> environment variable and restart the server to enable live web-search discovery.</div>}
+          {!aiEnabled && <div className="note warn">AI discovery is offline. Set the <code>OPENAI_API_KEY</code> environment variable and restart the server to enable live web-search discovery.</div>}
           <div className="discover-bar">
             <div className="field" style={{ flex: 1, minWidth: 260 }}><label>Focus (optional)</label><input className="search" placeholder="e.g. accounts payable agents, EU-based…" value={focus} onChange={(e) => setFocus(e.target.value)} /></div>
             <div className="field" style={{ width: 110 }}><label>How many</label><select className="select" value={count} onChange={(e) => setCount(e.target.value)}>{[3, 5, 7, 10].map((n) => <option key={n} value={n}>{n}</option>)}</select></div>
