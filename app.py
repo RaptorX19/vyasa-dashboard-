@@ -25,7 +25,6 @@ except ImportError:
 
 DATA_FILE = BASE_DIR / "data" / "competitors.json"
 EVENTS_FILE = BASE_DIR / "data" / "events.json"
-WINLOSS_FILE = BASE_DIR / "data" / "winloss.json"
 
 app = Flask(__name__, static_folder="static", template_folder="templates")
 _lock = threading.Lock()
@@ -367,29 +366,6 @@ def delete_event(eid):
     events = [e for e in _read(EVENTS_FILE, []) if e.get("id") != eid]
     _write(EVENTS_FILE, events)
     return jsonify({"deleted": eid})
-
-
-# ---------------- Win/Loss ----------------
-@app.route("/api/winloss", methods=["GET"])
-def list_winloss():
-    return jsonify(_read(WINLOSS_FILE, []))
-
-
-@app.route("/api/winloss", methods=["POST"])
-def add_winloss():
-    payload = request.get_json(force=True)
-    records = _read(WINLOSS_FILE, [])
-    payload["id"] = f"wl{int(__import__('time').time() * 1000)}"
-    records.append(payload)
-    _write(WINLOSS_FILE, records)
-    return jsonify(payload), 201
-
-
-@app.route("/api/winloss/<wid>", methods=["DELETE"])
-def delete_winloss(wid):
-    records = [r for r in _read(WINLOSS_FILE, []) if r.get("id") != wid]
-    _write(WINLOSS_FILE, records)
-    return jsonify({"deleted": wid})
 
 
 # ---------------- AI helper (OpenAI) ----------------

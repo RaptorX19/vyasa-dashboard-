@@ -567,81 +567,6 @@ function Signals({ events, items, onChange }) {
   );
 }
 
-/* ---------------- Win/Loss ---------------- */
-function WinLoss({ records, items, onChange }) {
-  const [adding, setAdding] = useState(false);
-  const blank = { competitor: "", outcome: "Won", deal: "", date: new Date().toISOString().slice(0, 10), reason: "", notes: "" };
-  const [f, setF] = useState(blank);
-
-  const save = async () => {
-    if (!f.deal.trim() || !f.competitor) return;
-    await api.post("/api/winloss", f);
-    setF(blank); setAdding(false); onChange();
-  };
-  const del = async (id) => { if (confirm("Delete this record?")) { await api.del(`/api/winloss/${id}`); onChange(); } };
-
-  const won = records.filter((r) => r.outcome === "Won").length;
-  const lost = records.filter((r) => r.outcome === "Lost").length;
-  const rate = won + lost ? Math.round((won / (won + lost)) * 100) : 0;
-  const byComp = useMemo(() => {
-    const m = {};
-    records.forEach((r) => { const k = r.competitor || "—"; m[k] = m[k] || { w: 0, l: 0 }; if (r.outcome === "Won") m[k].w++; else m[k].l++; });
-    return Object.entries(m).sort((a, b) => (b[1].w + b[1].l) - (a[1].w + a[1].l));
-  }, [records]);
-
-  return (
-    <div>
-      <div className="page-head">
-        <h1>Win / <em>Loss</em> Intelligence</h1>
-        <p>Record competitive deal outcomes and surface patterns in why Vyasa wins or loses against each competitor.</p>
-      </div>
-      <div className="stat-grid">
-        <div className="stat-card"><div className="stat-label">Deals logged</div><div className="stat-value violet">{records.length}</div></div>
-        <div className="stat-card"><div className="stat-label">Won</div><div className="stat-value good">{won}</div></div>
-        <div className="stat-card"><div className="stat-label">Lost</div><div className="stat-value warn">{lost}</div></div>
-        <div className="stat-card"><div className="stat-label">Win rate</div><div className="stat-value indigo">{rate}%</div></div>
-      </div>
-      <div className="toolbar"><button className="btn primary" onClick={() => setAdding((a) => !a)}>{adding ? "Cancel" : "+ Log deal"}</button></div>
-      {adding && (
-        <div className="panel" style={{ marginBottom: 20 }}>
-          <div className="form-grid">
-            <div className="field"><label>Competitor</label><select value={f.competitor} onChange={(e) => setF({ ...f, competitor: e.target.value })}><option value="">Select…</option>{items.map((c) => <option key={c.id} value={c.name}>{c.name}</option>)}</select></div>
-            <div className="field"><label>Outcome</label><select value={f.outcome} onChange={(e) => setF({ ...f, outcome: e.target.value })}><option>Won</option><option>Lost</option></select></div>
-            <div className="field"><label>Deal / account</label><input value={f.deal} onChange={(e) => setF({ ...f, deal: e.target.value })} /></div>
-            <div className="field"><label>Date</label><input type="date" value={f.date} onChange={(e) => setF({ ...f, date: e.target.value })} /></div>
-            <div className="field full"><label>Primary reason</label><input value={f.reason} onChange={(e) => setF({ ...f, reason: e.target.value })} placeholder="e.g. Coexistence story, integration depth, price" /></div>
-            <div className="field full"><label>Notes</label><textarea value={f.notes} onChange={(e) => setF({ ...f, notes: e.target.value })} /></div>
-          </div>
-          <div className="form-actions"><button className="btn primary" onClick={save}>Save record</button></div>
-        </div>
-      )}
-      {byComp.length > 0 && (
-        <div className="panel" style={{ marginBottom: 18 }}>
-          <h2>Record by competitor</h2>
-          {byComp.map(([name, r]) => (
-            <div key={name} style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
-              <div style={{ width: 180, fontWeight: 600 }}>{name}</div>
-              <span className="score lo">{r.w}W</span><span className="score hi">{r.l}L</span>
-            </div>
-          ))}
-        </div>
-      )}
-      <div className="panel">
-        {records.length === 0 ? <div className="empty">No deals logged yet.</div> : records.map((r) => (
-          <div key={r.id} style={{ borderBottom: "1px solid var(--line)", padding: "12px 0", display: "flex", alignItems: "center", gap: 12 }}>
-            <span className={`score ${r.outcome === "Won" ? "lo" : "hi"}`}>{r.outcome}</span>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontWeight: 600 }}>{r.deal} <span className="tag">vs {r.competitor} · {r.date}</span></div>
-              {r.reason && <div className="tag" style={{ fontSize: 13 }}>{r.reason}</div>}
-            </div>
-            <button className="btn sm danger" onClick={() => del(r.id)}>Delete</button>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 /* ---------------- Insights ---------------- */
 function Insights({ aiEnabled }) {
   const [loading, setLoading] = useState(false);
@@ -889,7 +814,6 @@ const NAV = [
   { id: "battlecards", label: "Battlecards", ic: "▣" },
   { id: "accounts", label: "Accounts", ic: "◎" },
   { id: "signals", label: "Signals", ic: "↯" },
-  { id: "winloss", label: "Win/Loss", ic: "✓" },
   { id: "insights", label: "Insights", ic: "✦" },
 ];
 
@@ -902,15 +826,14 @@ function App() {
   const [vyasa, setVyasa] = useState({ id: "vyasa", name: "Vyasa" });
   const [aiEnabled, setAiEnabled] = useState(false);
   const [events, setEvents] = useState([]);
-  const [winloss, setWinloss] = useState([]);
   const [view, setView] = useState("overview");
   const [detail, setDetail] = useState(null);
   const [editing, setEditing] = useState(undefined);
   const [discover, setDiscover] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const reload = async () => setItems(await api.get("/api/competitors"));
   const reloadEvents = async () => setEvents(await api.get("/api/events"));
-  const reloadWinloss = async () => setWinloss(await api.get("/api/winloss"));
 
   useEffect(() => {
     (async () => {
@@ -921,7 +844,7 @@ function App() {
       setAxes(m.positioningAxes || {});
       setVyasa(m.vyasa || { id: "vyasa", name: "Vyasa" });
       setAiEnabled(m.aiEnabled);
-      await reload(); await reloadEvents(); await reloadWinloss();
+      await reload(); await reloadEvents();
     })();
   }, []);
 
@@ -944,10 +867,11 @@ function App() {
         <div className="brand">
           <div className="brand-logo">V</div>
           <div><div className="brand-name">Vyasa</div><div className="brand-sub">Reason · Orchestrate · Act</div></div>
+          <button className="menu-toggle" aria-label="Toggle menu" aria-expanded={menuOpen} onClick={() => setMenuOpen((o) => !o)}>{menuOpen ? "✕" : "☰"}</button>
         </div>
         <div className="tagline">Competitive intelligence</div>
-        <nav className="nav">
-          {NAV.map((n) => <button key={n.id} className={`nav-item ${view === n.id ? "active" : ""}`} onClick={() => setView(n.id)}><span className="ic">{n.ic}</span>{n.label}</button>)}
+        <nav className={`nav ${menuOpen ? "open" : ""}`}>
+          {NAV.map((n) => <button key={n.id} className={`nav-item ${view === n.id ? "active" : ""}`} onClick={() => { setView(n.id); setMenuOpen(false); }}><span className="ic">{n.ic}</span>{n.label}</button>)}
         </nav>
         <div className="sidebar-foot">
           {items.length} competitors tracked<br />
@@ -964,7 +888,6 @@ function App() {
         {view === "battlecards" && <Battlecards items={items} aiEnabled={aiEnabled} onUpdated={reload} />}
         {view === "accounts" && <Accounts aiEnabled={aiEnabled} />}
         {view === "signals" && <Signals events={events} items={items} onChange={reloadEvents} />}
-        {view === "winloss" && <WinLoss records={winloss} items={items} onChange={reloadWinloss} />}
         {view === "insights" && <Insights aiEnabled={aiEnabled} />}
       </main>
 
