@@ -263,7 +263,7 @@ function Landscape({ items, axes, vyasa }) {
   if (!keys.length) return <div className="empty">Loading axes…</div>;
   const pts = [...items, vyasa].filter((c) => c && c.positioning);
 
-  const axisLabel = (k) => (axes[k] ? axes[k][1] : k);
+  const axisLabel = (k) => k.charAt(0).toUpperCase() + k.slice(1);
   return (
     <div>
       <div className="page-head">
@@ -865,11 +865,10 @@ function App() {
     <div className="app">
       <aside className="sidebar">
         <div className="brand">
-          <div className="brand-logo">V</div>
+          <img className="brand-logo" src="/static/logo.svg" alt="Vyasa logo" />
           <div><div className="brand-name">Vyasa</div><div className="brand-sub">Reason · Orchestrate · Act</div></div>
           <button className="menu-toggle" aria-label="Toggle menu" aria-expanded={menuOpen} onClick={() => setMenuOpen((o) => !o)}>{menuOpen ? "✕" : "☰"}</button>
         </div>
-        <div className="tagline">Competitive intelligence</div>
         <nav className={`nav ${menuOpen ? "open" : ""}`}>
           {NAV.map((n) => <button key={n.id} className={`nav-item ${view === n.id ? "active" : ""}`} onClick={() => { setView(n.id); setMenuOpen(false); }}><span className="ic">{n.ic}</span>{n.label}</button>)}
         </nav>
