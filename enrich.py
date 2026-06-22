@@ -6,6 +6,7 @@ as such via the evidence/confidence fields, so the UI can distinguish
 inferred data from verified data.
 """
 import json
+import re
 from pathlib import Path
 
 DATA = Path(__file__).resolve().parent / "data" / "competitors.json"
@@ -59,6 +60,66 @@ NUDGE = {
 
 CTX_SCORE = {"full": 2, "partial": 1, "none": 0}
 
+# Per-capability statement of Vyasa's relative edge, used when a competitor
+# does NOT do that capability fully. Keyed to CAP_KEYS.
+CAP_STRONGER = {
+    "enterprise_context_graph": "Enterprise context graph spanning ERP, CRM, inbox and contracts — not just one workflow's data",
+    "cross_system_orchestration": "Cross-system orchestration above the stack, coordinating the tools you already run",
+    "persistent_workflow_state": "Persistent workflow state that survives across sessions, teams and hand-offs",
+    "human_approvals": "Human approvals wired into every consequential step, not bolted on",
+    "agentic_execution": "Agentic execution that drives processes end-to-end, not just surfacing recommendations",
+    "erp_crm_integration": "Treats ERP/CRM as a system of action (writes back), not a read-only connector",
+    "exception_handling": "Exception reasoning that resolves edge cases instead of escalating every break",
+}
+# Fallbacks if a competitor happens to be strong everywhere.
+CAP_STRONGER_DEFAULT = [
+    "Enterprise context graph spanning systems, not a single workflow",
+    "Cross-system orchestration above the stack (not a point tool)",
+    "Persistent workflow state + exception reasoning with human approvals",
+]
+
+
+def clean_category(cat):
+    """Strip the leading 'N. ' enumerator and any '(also ...)' / '(... focus)'
+    parentheticals so the category reads cleanly inside a sentence."""
+    if not cat or cat == "Not specified":
+        return "their niche"
+    cat = re.sub(r"^\s*\d+\.\s*", "", cat)        # drop "4. "
+    cat = re.sub(r"\s*\([^)]*\)", "", cat)         # drop "(also 2. ...)" / "(wholesale focus)"
+    return cat.strip().rstrip(".") or "their niche"
+
+
+def vyasa_stronger(c):
+    """Build a competitor-specific 'Where Vyasa is stronger' list from the
+    capabilities this competitor does NOT do fully (their gaps = Vyasa's edge),
+    plus one line anchored to their category so each card reads distinctly.
+
+    Same-category competitors share the same gap set, so the two capability
+    lines are rotated by a stable per-competitor offset — each surfaces a
+    different (still relevant) pair of Vyasa advantages."""
+    caps = c.get("capabilities") or {}
+    none_gaps = [k for k in CAP_KEYS if caps.get(k) == "none"]
+    partial_gaps = [k for k in CAP_KEYS if caps.get(k) == "partial"]
+    # Rotate the partial tier by a deterministic offset derived from the id so
+    # two companies in the same category don't show identical lines.
+    if partial_gaps:
+        offset = sum(ord(ch) for ch in c.get("id", "")) % len(partial_gaps)
+        partial_gaps = partial_gaps[offset:] + partial_gaps[:offset]
+    gaps = none_gaps + partial_gaps  # 'none' is the sharpest edge, keep it first
+    lines = [CAP_STRONGER[k] for k in gaps[:2]]
+    # Category-anchored closing line for per-company differentiation.
+    lines.append(
+        f"Sits above {clean_category(c.get('category'))} and the rest of your stack — "
+        "Vyasa orchestrates the workflow rather than living inside it"
+    )
+    # Pad with defaults if the competitor had no real gaps.
+    for d in CAP_STRONGER_DEFAULT:
+        if len(lines) >= 3:
+            break
+        if d not in lines:
+            lines.append(d)
+    return lines[:3]
+
 
 def battlecard(c):
     seg = c.get("customerSegment") or "enterprise teams"
@@ -68,11 +129,7 @@ def battlecard(c):
         "buyers": seg,
         "whyChosen": f"Focused, category-leading point solution in {c.get('category','its niche')} with credible investor backing ({c.get('investors','N/A')}).",
         "strong": strong,
-        "vyasaStronger": [
-            "Enterprise context graph spanning systems, not a single workflow",
-            "Cross-system orchestration above the stack (not a point tool)",
-            "Persistent workflow state + exception reasoning with human approvals",
-        ],
+        "vyasaStronger": vyasa_stronger(c),
         "objection": "“We already use a tool for this workflow — why add Vyasa?”",
         "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
         "discovery": [

@@ -76,9 +76,9 @@
         "Agentic AI layer that executes full procurement workflows on top of existing P2P/ERP systems"
       ],
       "vyasaStronger": [
-        "Enterprise context graph spanning systems, not a single workflow",
-        "Cross-system orchestration above the stack (not a point tool)",
-        "Persistent workflow state + exception reasoning with human approvals"
+        "Enterprise context graph spanning ERP, CRM, inbox and contracts — not just one workflow's data",
+        "Cross-system orchestration above the stack, coordinating the tools you already run",
+        "Sits above Procurement / procure-to-pay / intake-to-pay and the rest of your stack — Vyasa orchestrates the workflow rather than living inside it"
       ],
       "objection": "“We already use a tool for this workflow — why add Vyasa?”",
       "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
@@ -171,9 +171,9 @@
         "Agentic layer sitting directly on top of existing ERP for procurement/supply-chain execution"
       ],
       "vyasaStronger": [
-        "Enterprise context graph spanning systems, not a single workflow",
-        "Cross-system orchestration above the stack (not a point tool)",
-        "Persistent workflow state + exception reasoning with human approvals"
+        "Exception reasoning that resolves edge cases instead of escalating every break",
+        "Enterprise context graph spanning ERP, CRM, inbox and contracts — not just one workflow's data",
+        "Sits above Procurement / procure-to-pay / supply chain and the rest of your stack — Vyasa orchestrates the workflow rather than living inside it"
       ],
       "objection": "“We already use a tool for this workflow — why add Vyasa?”",
       "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
@@ -266,9 +266,9 @@
         "Plugs into existing ERP without migration; automates GL-level finance processes"
       ],
       "vyasaStronger": [
-        "Enterprise context graph spanning systems, not a single workflow",
-        "Cross-system orchestration above the stack (not a point tool)",
-        "Persistent workflow state + exception reasoning with human approvals"
+        "Enterprise context graph spanning ERP, CRM, inbox and contracts — not just one workflow's data",
+        "Cross-system orchestration above the stack, coordinating the tools you already run",
+        "Sits above Finance/accounting automation and the rest of your stack — Vyasa orchestrates the workflow rather than living inside it"
       ],
       "objection": "“We already use a tool for this workflow — why add Vyasa?”",
       "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
@@ -361,9 +361,9 @@
         "Connects agents to ERP/CRM for end-to-end back-office/ops automation"
       ],
       "vyasaStronger": [
-        "Enterprise context graph spanning systems, not a single workflow",
-        "Cross-system orchestration above the stack (not a point tool)",
-        "Persistent workflow state + exception reasoning with human approvals"
+        "Treats ERP/CRM as a system of action (writes back), not a read-only connector",
+        "Exception reasoning that resolves edge cases instead of escalating every break",
+        "Sits above Enterprise agent platforms and the rest of your stack — Vyasa orchestrates the workflow rather than living inside it"
       ],
       "objection": "“We already use a tool for this workflow — why add Vyasa?”",
       "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
@@ -456,9 +456,9 @@
         "Full AI-native ERP replacement with native automations"
       ],
       "vyasaStronger": [
-        "Enterprise context graph spanning systems, not a single workflow",
-        "Cross-system orchestration above the stack (not a point tool)",
-        "Persistent workflow state + exception reasoning with human approvals"
+        "Enterprise context graph spanning ERP, CRM, inbox and contracts — not just one workflow's data",
+        "Cross-system orchestration above the stack, coordinating the tools you already run",
+        "Sits above AI-native ERP or ERP replacement and the rest of your stack — Vyasa orchestrates the workflow rather than living inside it"
       ],
       "objection": "“We already use a tool for this workflow — why add Vyasa?”",
       "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
@@ -551,9 +551,9 @@
         "Full AI-native ERP replacement; replaces duct-taped legacy"
       ],
       "vyasaStronger": [
-        "Enterprise context graph spanning systems, not a single workflow",
-        "Cross-system orchestration above the stack (not a point tool)",
-        "Persistent workflow state + exception reasoning with human approvals"
+        "Enterprise context graph spanning ERP, CRM, inbox and contracts — not just one workflow's data",
+        "Cross-system orchestration above the stack, coordinating the tools you already run",
+        "Sits above AI-native ERP or ERP replacement and the rest of your stack — Vyasa orchestrates the workflow rather than living inside it"
       ],
       "objection": "“We already use a tool for this workflow — why add Vyasa?”",
       "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
@@ -646,9 +646,9 @@
         "Full AI-native ERP for finance teams"
       ],
       "vyasaStronger": [
-        "Enterprise context graph spanning systems, not a single workflow",
-        "Cross-system orchestration above the stack (not a point tool)",
-        "Persistent workflow state + exception reasoning with human approvals"
+        "Exception reasoning that resolves edge cases instead of escalating every break",
+        "Enterprise context graph spanning ERP, CRM, inbox and contracts — not just one workflow's data",
+        "Sits above AI-native ERP or ERP replacement and the rest of your stack — Vyasa orchestrates the workflow rather than living inside it"
       ],
       "objection": "“We already use a tool for this workflow — why add Vyasa?”",
       "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
@@ -741,9 +741,9 @@
         "Layer/plug-in for existing ERP or full modular replacement"
       ],
       "vyasaStronger": [
-        "Enterprise context graph spanning systems, not a single workflow",
-        "Cross-system orchestration above the stack (not a point tool)",
-        "Persistent workflow state + exception reasoning with human approvals"
+        "Enterprise context graph spanning ERP, CRM, inbox and contracts — not just one workflow's data",
+        "Persistent workflow state that survives across sessions, teams and hand-offs",
+        "Sits above AI layer / agentic workflow layer on top of ERP and the rest of your stack — Vyasa orchestrates the workflow rather than living inside it"
       ],
       "objection": "“We already use a tool for this workflow — why add Vyasa?”",
       "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
@@ -836,9 +836,9 @@
         "Full AI-native finance/ERP replacement"
       ],
       "vyasaStronger": [
-        "Enterprise context graph spanning systems, not a single workflow",
-        "Cross-system orchestration above the stack (not a point tool)",
-        "Persistent workflow state + exception reasoning with human approvals"
+        "Enterprise context graph spanning ERP, CRM, inbox and contracts — not just one workflow's data",
+        "Cross-system orchestration above the stack, coordinating the tools you already run",
+        "Sits above AI-native ERP or ERP replacement and the rest of your stack — Vyasa orchestrates the workflow rather than living inside it"
       ],
       "objection": "“We already use a tool for this workflow — why add Vyasa?”",
       "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
@@ -931,9 +931,9 @@
         "Adds agentic automation on top of existing ERPs"
       ],
       "vyasaStronger": [
-        "Enterprise context graph spanning systems, not a single workflow",
-        "Cross-system orchestration above the stack (not a point tool)",
-        "Persistent workflow state + exception reasoning with human approvals"
+        "Enterprise context graph spanning ERP, CRM, inbox and contracts — not just one workflow's data",
+        "Persistent workflow state that survives across sessions, teams and hand-offs",
+        "Sits above AI layer / agentic workflow layer on top of ERP and the rest of your stack — Vyasa orchestrates the workflow rather than living inside it"
       ],
       "objection": "“We already use a tool for this workflow — why add Vyasa?”",
       "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
@@ -1026,9 +1026,9 @@
         "AI layer automating ERP data/workflows for distributors"
       ],
       "vyasaStronger": [
-        "Enterprise context graph spanning systems, not a single workflow",
-        "Cross-system orchestration above the stack (not a point tool)",
-        "Persistent workflow state + exception reasoning with human approvals"
+        "Persistent workflow state that survives across sessions, teams and hand-offs",
+        "Human approvals wired into every consequential step, not bolted on",
+        "Sits above AI layer / agentic workflow layer on top of ERP and the rest of your stack — Vyasa orchestrates the workflow rather than living inside it"
       ],
       "objection": "“We already use a tool for this workflow — why add Vyasa?”",
       "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
@@ -1121,9 +1121,9 @@
         "ERP computer agents automating end-to-end workflows"
       ],
       "vyasaStronger": [
-        "Enterprise context graph spanning systems, not a single workflow",
-        "Cross-system orchestration above the stack (not a point tool)",
-        "Persistent workflow state + exception reasoning with human approvals"
+        "Treats ERP/CRM as a system of action (writes back), not a read-only connector",
+        "Exception reasoning that resolves edge cases instead of escalating every break",
+        "Sits above Enterprise agent platforms and the rest of your stack — Vyasa orchestrates the workflow rather than living inside it"
       ],
       "objection": "“We already use a tool for this workflow — why add Vyasa?”",
       "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
@@ -1216,9 +1216,9 @@
         "AI agents integrate with ERP/billing for O2C/AR"
       ],
       "vyasaStronger": [
-        "Enterprise context graph spanning systems, not a single workflow",
-        "Cross-system orchestration above the stack (not a point tool)",
-        "Persistent workflow state + exception reasoning with human approvals"
+        "Enterprise context graph spanning ERP, CRM, inbox and contracts — not just one workflow's data",
+        "Persistent workflow state that survives across sessions, teams and hand-offs",
+        "Sits above Order-to-cash / accounts receivable / collections and the rest of your stack — Vyasa orchestrates the workflow rather than living inside it"
       ],
       "objection": "“We already use a tool for this workflow — why add Vyasa?”",
       "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
@@ -1311,9 +1311,9 @@
         "AI layer for procurement/P2P automation with ERP"
       ],
       "vyasaStronger": [
-        "Enterprise context graph spanning systems, not a single workflow",
-        "Cross-system orchestration above the stack (not a point tool)",
-        "Persistent workflow state + exception reasoning with human approvals"
+        "Exception reasoning that resolves edge cases instead of escalating every break",
+        "Enterprise context graph spanning ERP, CRM, inbox and contracts — not just one workflow's data",
+        "Sits above Procurement / procure-to-pay / intake-to-pay and the rest of your stack — Vyasa orchestrates the workflow rather than living inside it"
       ],
       "objection": "“We already use a tool for this workflow — why add Vyasa?”",
       "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
@@ -1401,9 +1401,9 @@
         "Established positioning"
       ],
       "vyasaStronger": [
-        "Enterprise context graph spanning systems, not a single workflow",
-        "Cross-system orchestration above the stack (not a point tool)",
-        "Persistent workflow state + exception reasoning with human approvals"
+        "Enterprise context graph spanning ERP, CRM, inbox and contracts — not just one workflow's data",
+        "Cross-system orchestration above the stack, coordinating the tools you already run",
+        "Sits above their niche and the rest of your stack — Vyasa orchestrates the workflow rather than living inside it"
       ],
       "objection": "“We already use a tool for this workflow — why add Vyasa?”",
       "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
@@ -1491,9 +1491,9 @@
         "Established positioning"
       ],
       "vyasaStronger": [
-        "Enterprise context graph spanning systems, not a single workflow",
-        "Cross-system orchestration above the stack (not a point tool)",
-        "Persistent workflow state + exception reasoning with human approvals"
+        "Enterprise context graph spanning ERP, CRM, inbox and contracts — not just one workflow's data",
+        "Cross-system orchestration above the stack, coordinating the tools you already run",
+        "Sits above their niche and the rest of your stack — Vyasa orchestrates the workflow rather than living inside it"
       ],
       "objection": "“We already use a tool for this workflow — why add Vyasa?”",
       "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
@@ -1581,9 +1581,9 @@
         "Established positioning"
       ],
       "vyasaStronger": [
-        "Enterprise context graph spanning systems, not a single workflow",
-        "Cross-system orchestration above the stack (not a point tool)",
-        "Persistent workflow state + exception reasoning with human approvals"
+        "Enterprise context graph spanning ERP, CRM, inbox and contracts — not just one workflow's data",
+        "Cross-system orchestration above the stack, coordinating the tools you already run",
+        "Sits above their niche and the rest of your stack — Vyasa orchestrates the workflow rather than living inside it"
       ],
       "objection": "“We already use a tool for this workflow — why add Vyasa?”",
       "response": "Vyasa is the reasoning + orchestration layer above your stack; it coordinates across the very tools you already run rather than replacing one of them.",
