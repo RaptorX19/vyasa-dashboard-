@@ -1,6 +1,7 @@
 const { useState, useEffect, useRef, useMemo } = React;
 
-const PALETTE = ["#6d3bd4", "#4f46e5", "#8b5cf6", "#a855f7", "#7c3aed", "#5b21b6", "#6366f1", "#9333ea", "#c084fc"];
+// Categorical palette: distinct hues (brand violet leads) so adjacent slices are easy to tell apart.
+const PALETTE = ["#6d3bd4", "#2563eb", "#06b6d4", "#10b981", "#f59e0b", "#ec4899", "#ef4444", "#14b8a6", "#64748b"];
 const RELEVANCE_COLORS = { High: "#b42318", "Medium-High": "#d97706", Medium: "#ca8a04", Low: "#6366f1", "Not specified": "#c9c3df" };
 
 const api = {
