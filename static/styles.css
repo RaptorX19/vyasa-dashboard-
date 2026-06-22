@@ -318,9 +318,53 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .insight .why b { color: var(--violet); }
 .cat-tag { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 3px 9px; border-radius: 999px; background: #efeafe; color: #6d3bd4; }
 
+/* ---------- Responsive ---------- */
 @media (max-width: 1080px) {
   .stat-grid { grid-template-columns: repeat(2, 1fr); }
   .grid-2, .bc-grid, .swot { grid-template-columns: 1fr; }
   .form-grid { grid-template-columns: 1fr; }
   .main { padding: 26px 22px 50px; }
+}
+
+/* Tablet & mobile: the fixed side rail becomes a sticky top bar whose nav
+   scrolls horizontally, so the content gets the full width. */
+@media (max-width: 768px) {
+  .app { flex-direction: column; }
+  .sidebar {
+    width: 100%; height: auto; position: sticky; top: 0; z-index: 40;
+    flex-direction: column; padding: 12px 14px 8px;
+    border-right: none; border-bottom: 1px solid var(--line);
+  }
+  .tagline, .sidebar-foot { display: none; }
+  .nav {
+    flex-direction: row; gap: 6px; margin-top: 10px;
+    overflow-x: auto; padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav-item { flex: 0 0 auto; padding: 8px 13px; font-size: 13px; white-space: nowrap; }
+  .main { padding: 22px 18px 44px; max-width: none; }
+  .page-head h1 { font-size: 26px; }
+  .page-head p { font-size: 14px; margin-bottom: 20px; }
+  .chart-row { flex-wrap: wrap; gap: 16px; }
+  .chart-box { width: 180px; height: 180px; margin: 0 auto; }
+  .kv { grid-template-columns: 1fr; gap: 2px 0; }
+  .kv dt { margin-top: 10px; font-weight: 600; }
+  .overlay { padding: 12px; }
+  .modal-head { padding: 20px 20px 14px; }
+  .modal-body { padding: 18px 20px 22px; }
+  .modal-title { font-size: 22px; }
+}
+
+/* Small phones */
+@media (max-width: 520px) {
+  .stat-grid { grid-template-columns: 1fr; }
+  .card-grid { grid-template-columns: 1fr; }
+  .toolbar { gap: 8px; }
+  .search { min-width: 0; }
+  .page-head h1 { font-size: 23px; }
+  .brand-logo { width: 36px; height: 36px; font-size: 18px; }
+  .map-wrap { aspect-ratio: 4 / 3; }
+  .form-actions { flex-direction: column-reverse; }
+  .form-actions .btn { width: 100%; justify-content: center; }
 }
