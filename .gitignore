@@ -4,3 +4,7 @@ __pycache__/
 .DS_Store
 venv/
 .venv/
+
+# Runtime data store (seeded from seed/ on first boot; persisted via a volume
+# in production). Only the seed/ copies are tracked.
+/data/
