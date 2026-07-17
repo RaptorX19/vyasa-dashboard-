@@ -27,7 +27,7 @@ const blankComp = () => ({
   name: "", category: "", categoryGroup: 0, website: "", founder: "", customerSegment: "",
   relevance: "High", overview: "", established: "", fundingStage: "", fundingAmount: 0,
   fundingYear: "", investors: "", strategicNotes: "", contextScore: "", threatScoreOverride: "",
-  strengths: [], weaknesses: [], opportunities: [], threats: [],
+  strengths: [], weaknesses: [], opportunities: [], threats: [], capabilities: {},
 });
 
 // Auto composite threat score 0-100 from relevance, funding and context depth.
@@ -43,7 +43,6 @@ const threatScore = (c) => {
   if (o !== undefined && o !== null && o !== "") return Math.min(100, Math.max(0, Math.round(Number(o))));
   return autoThreatScore(c);
 };
-const scoreCls = (n) => (n >= 66 ? "hi" : n >= 40 ? "mid" : "lo");
 const capCls = (v) => (v === "full" || v === "direct" ? (v === "direct" ? "direct" : "full") : v === "partial" ? "partial" : "none");
 const capText = { full: "Full", partial: "Partial", none: "—", direct: "Direct", };
 
@@ -161,7 +160,7 @@ function Overview({ items, labels, events, setView }) {
             <div key={c.id} style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
               <div style={{ width: 150, fontWeight: 600, fontSize: 14, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{c.name}</div>
               <div className="bar" style={{ flex: 1 }}><span style={{ width: `${c.ts}%` }}></span></div>
-              <span className={`score ${scoreCls(c.ts)}`}>{c.ts}</span>
+              <span className="score threat">{c.ts}</span>
             </div>
           ))}
         </div>
@@ -231,6 +230,12 @@ function Companies({ items, labels, onOpen, onAdd, onDiscover }) {
         <button className="btn primary" onClick={onAdd}>+ Add</button>
       </div>
 
+      <div className="score-legend">
+        <span className="legend-item"><span className="legend-swatch threat"></span> Threat score</span>
+        <span className="legend-item"><span className="legend-swatch context"></span> Context score</span>
+        <span className="legend-note">shown top-right of each card</span>
+      </div>
+
       {filtered.length === 0 ? <div className="empty">No competitors match your filters.</div> : (
         <div className="card-grid">
           {filtered.map((c) => {
@@ -239,7 +244,10 @@ function Companies({ items, labels, onOpen, onAdd, onDiscover }) {
               <div className="cc" key={c.id} onClick={() => onOpen(c)}>
                 <div className="cc-top">
                   <div className="cc-name">{c.name}</div>
-                  <span className={`score ${scoreCls(ts)}`} title="Threat score">{ts}</span>
+                  <div className="cc-scores">
+                    <b className="score threat" title="Threat score">{ts}</b>
+                    <b className="score ctx" title="Context score">{c.contextScore != null ? c.contextScore : "—"}</b>
+                  </div>
                 </div>
                 <div className="cc-meta">
                   <span className="pill cat">{labels[c.categoryGroup] || "Uncategorized"}</span>
@@ -249,7 +257,6 @@ function Companies({ items, labels, onOpen, onAdd, onDiscover }) {
                 <div className="cc-overview">{c.overview || "No overview yet."}</div>
                 <div className="cc-foot">
                   <span className="cc-funding">{fmtFunding(c.fundingAmount)}{c.fundingStage && c.fundingStage !== "Not specified" ? ` · ${c.fundingStage}` : ""}</span>
-                  <span className="tag">Context {c.contextScore != null ? c.contextScore : "—"}</span>
                 </div>
               </div>
             );
@@ -706,8 +713,8 @@ function DetailModal({ comp, labels, capLabels, onClose, onEdit, onDelete }) {
               <span className="pill cat">{labels[comp.categoryGroup] || "Uncategorized"}</span>
               <span className={`pill ${(comp.relevance || "Not specified").replace(/\s/g, "-")}`}>{comp.relevance}</span>
               <span className={`pill src-${comp.source}`}>{comp.source}</span>
-              <span className={`score ${scoreCls(ts)}`}>Threat {ts}</span>
-              {comp.contextScore != null && <span className="score lo">Context {comp.contextScore}</span>}
+              <span className="score threat">Threat {ts}</span>
+              {comp.contextScore != null && <span className="score ctx">Context {comp.contextScore}</span>}
             </div>
           </div>
           <button className="x" onClick={onClose}>×</button>
@@ -761,12 +768,15 @@ function DetailModal({ comp, labels, capLabels, onClose, onEdit, onDelete }) {
 }
 
 /* ---------------- Add/Edit form ---------------- */
-function EditModal({ comp, labels, aiEnabled, onClose, onSave }) {
+function EditModal({ comp, labels, capLabels, aiEnabled, onClose, onSave }) {
   const [f, setF] = useState(() => ({ ...blankComp(), ...comp }));
   const set = (k, v) => setF((s) => ({ ...s, [k]: v }));
+  const setCap = (k, v) => setF((s) => ({ ...s, capabilities: { ...(s.capabilities || {}), [k]: v } }));
   // Keep raw lines while typing (so spaces/blank lines survive); clean on save.
   const setList = (k, v) => set(k, v.split("\n"));
   const isEdit = !!comp;
+  const contextSet = f.contextScore !== "" && f.contextScore != null;
+  const capsUnset = Object.values(f.capabilities || {}).every((v) => !v || v === "none");
 
   const [linkedin, setLinkedin] = useState("");
   const [enriching, setEnriching] = useState(false);
@@ -854,6 +864,21 @@ function EditModal({ comp, labels, aiEnabled, onClose, onSave }) {
             <div className="field"><label>Founders</label><input value={f.founder} onChange={(e) => set("founder", e.target.value)} /></div>
             <div className="field"><label>Context score (0–100)</label><input type="number" min="0" max="100" value={f.contextScore ?? ""} onChange={(e) => set("contextScore", e.target.value)} placeholder="e.g. 70" /></div>
             <div className="field"><label>Threat score override</label><input type="number" min="0" max="100" value={f.threatScoreOverride ?? ""} onChange={(e) => set("threatScoreOverride", e.target.value)} placeholder={`Auto: ${autoThreatScore(f)} — leave blank to auto-calc`} /></div>
+            {capLabels && Object.keys(capLabels).length > 0 && (
+              <div className="field full">
+                <label>Capability levels {contextSet && capsUnset && <span className="cap-hint">— you set a context score; set how this competitor compares to Vyasa below</span>}</label>
+                <div className="cap-grid">
+                  {Object.entries(capLabels).map(([k, lbl]) => (
+                    <div className="cap-field" key={k}>
+                      <span>{lbl}</span>
+                      <select value={(f.capabilities || {})[k] || "none"} onChange={(e) => setCap(k, e.target.value)}>
+                        {[["full", "Full"], ["partial", "Partial"], ["none", "None"]].map(([val, t]) => <option key={val} value={val}>{t}</option>)}
+                      </select>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
             <div className="field full"><label>Investors</label><input value={f.investors} onChange={(e) => set("investors", e.target.value)} /></div>
             <div className="field full"><label>Overview</label><textarea value={f.overview} onChange={(e) => set("overview", e.target.value)} /></div>
             <div className="field full"><label>Strategic notes</label><textarea value={f.strategicNotes} onChange={(e) => set("strategicNotes", e.target.value)} /></div>
@@ -1033,7 +1058,7 @@ function App() {
       </main>
 
       {detail && <DetailModal comp={detail} labels={labels} capLabels={capLabels} onClose={() => setDetail(null)} onEdit={(c) => { setDetail(null); setEditing(c); }} onDelete={remove} />}
-      {editing !== undefined && <EditModal comp={editing} labels={labels} aiEnabled={aiEnabled} onClose={() => setEditing(undefined)} onSave={save} />}
+      {editing !== undefined && <EditModal comp={editing} labels={labels} capLabels={capLabels} aiEnabled={aiEnabled} onClose={() => setEditing(undefined)} onSave={save} />}
       {discover && <DiscoverModal aiEnabled={aiEnabled} onClose={() => setDiscover(false)} onImported={() => { reload(); }} />}
     </div>
   );

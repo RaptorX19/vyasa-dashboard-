@@ -147,6 +147,15 @@ def normalize(comp):
         comp.setdefault(key, [])
     comp.setdefault("strategicNotes", "")
     comp.setdefault("source", "manual")
+    # Capability levels: always expose all 7 keys, coercing unknowns to "none".
+    caps = comp.get("capabilities")
+    if not isinstance(caps, dict):
+        caps = {}
+    valid_levels = {"full", "partial", "none", "direct"}
+    comp["capabilities"] = {
+        k: (caps.get(k) if caps.get(k) in valid_levels else "none")
+        for k in CAPABILITY_LABELS
+    }
     # Scores: contextScore may be null; threatScoreOverride is null unless the
     # user manually pins the threat score (else the frontend auto-computes it).
     comp.setdefault("contextScore", None)
