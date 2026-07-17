@@ -30,7 +30,12 @@ except ImportError:
 # anywhere else with DATA_DIR set to match. On first boot we copy the seeds in
 # so a fresh deploy starts populated, but later adds survive redeploys.
 SEED_DIR = BASE_DIR / "seed"
-DATA_DIR = Path(os.environ.get("DATA_DIR") or (BASE_DIR / "data"))
+# Data dir precedence: explicit DATA_DIR, else the volume Railway injects via
+# RAILWAY_VOLUME_MOUNT_PATH when one is actually attached, else ./data locally.
+# Auto-using the injected mount path makes persistence work no matter what path
+# the volume is mounted at, so there's no path to mismatch.
+_railway_vol = os.environ.get("RAILWAY_VOLUME_MOUNT_PATH")
+DATA_DIR = Path(os.environ.get("DATA_DIR") or _railway_vol or (BASE_DIR / "data"))
 DATA_FILE = DATA_DIR / "competitors.json"
 EVENTS_FILE = DATA_DIR / "events.json"
 
@@ -48,7 +53,11 @@ def _ensure_seeded():
         n = len(json.loads(DATA_FILE.read_text())) if DATA_FILE.exists() else 0
     except (json.JSONDecodeError, OSError):
         n = -1
-    print(f"[data] DATA_DIR={DATA_DIR} competitors={n}", flush=True)
+    print(
+        f"[data] DATA_DIR={DATA_DIR} "
+        f"railway_volume={_railway_vol or '(NONE ATTACHED)'} competitors={n}",
+        flush=True,
+    )
 
 
 _ensure_seeded()
