@@ -470,6 +470,127 @@ def delete_event(eid):
     return jsonify({"deleted": eid})
 
 
+def _signal_key(competitor, title):
+    """Dedupe key: same competitor + same headline (first 50 chars, lowercased)."""
+    return ((competitor or "").strip().lower(), (title or "").strip().lower()[:50])
+
+
+@app.route("/api/events/discover", methods=["POST"])
+def discover_events():
+    """Use OpenAI + web search to find recent competitor signals (funding,
+    product, GTM) across the tracked set. Returns candidates for review — does
+    NOT persist them; the frontend imports the ones the user keeps."""
+    client, cerr = _ai_client()
+    if cerr == "no_key":
+        return (
+            jsonify(
+                {
+                    "error": "OPENAI_API_KEY not set. Add it to your environment "
+                    "to enable live signal discovery."
+                }
+            ),
+            400,
+        )
+    if cerr:
+        return jsonify({"error": cerr}), 500
+
+    body = request.get_json(silent=True) or {}
+    days = int(body.get("days") or 90)
+    days = max(7, min(days, 365))
+
+    items = load_data()
+    names = [c["name"] for c in items]
+    if not names:
+        return jsonify({"candidates": [], "count": 0})
+    id_by_name = {c["name"].strip().lower(): c["id"] for c in items}
+    seen = {_signal_key(e.get("competitor"), e.get("title")) for e in _read(EVENTS_FILE, [])}
+
+    schema_hint = (
+        '{"signals": [{"date": "YYYY-MM-DD", "competitor": str (MUST exactly '
+        'match one tracked name), "type": "funding"|"product"|"gtm"|"other", '
+        '"title": str (short headline, e.g. "Acme raised Series B ($40M)"), '
+        '"detail": str (one sentence), "impact": "High"|"Medium"|"Low", '
+        '"source": str (article/press-release URL)}]}'
+    )
+
+    prompt = (
+        f"{VYASA_CONTEXT}\n\n"
+        f"Find REAL news signals from the last {days} days — funding rounds, "
+        "product launches, major partnerships or go-to-market moves — for any of "
+        "these tracked competitors:\n"
+        f"{', '.join(names)}.\n\n"
+        "Use web search to verify each item against a real, dated source "
+        "(article or press release). Only include items you can attribute to a "
+        "real source — do not invent news, and skip companies with nothing "
+        "recent. Use the EXACT company name from the list above in 'competitor'.\n\n"
+        "Return ONLY a JSON object (no prose, no markdown fences) matching:\n"
+        f"{schema_hint}"
+    )
+
+    text, aerr = _openai_text(client, prompt, use_search=True, max_tokens=3000)
+    if aerr:
+        return jsonify({"error": aerr}), 502
+
+    data = _extract_json(text)
+    if data is None:
+        return jsonify({"error": "Could not parse AI response", "raw": text[:2000]}), 502
+
+    raw = data.get("signals", []) if isinstance(data, dict) else []
+    fresh, batch_seen = [], set()
+    for s in raw:
+        if not isinstance(s, dict):
+            continue
+        name = (s.get("competitor") or "").strip()
+        title = (s.get("title") or "").strip()
+        if not name or not title:
+            continue
+        key = _signal_key(name, title)
+        if key in seen or key in batch_seen:
+            continue
+        batch_seen.add(key)
+        fresh.append(
+            {
+                "date": (s.get("date") or "").strip(),
+                "competitor": name,
+                "competitorId": id_by_name.get(name.lower()),
+                "type": (s.get("type") or "other").strip().lower(),
+                "title": title,
+                "detail": (s.get("detail") or "").strip(),
+                "impact": (s.get("impact") or "").strip(),
+                "source": (s.get("source") or "").strip(),
+            }
+        )
+    return jsonify({"candidates": fresh, "count": len(fresh)})
+
+
+@app.route("/api/events/import", methods=["POST"])
+def import_events():
+    """Bulk-append reviewed signals, generating ids and skipping duplicates."""
+    body = request.get_json(silent=True) or {}
+    incoming = body.get("events") or []
+    events = _read(EVENTS_FILE, [])
+    seen = {_signal_key(e.get("competitor"), e.get("title")) for e in events}
+    base = int(__import__("time").time() * 1000)
+    added = 0
+    for i, s in enumerate(incoming):
+        if not isinstance(s, dict):
+            continue
+        name = (s.get("competitor") or "").strip()
+        title = (s.get("title") or "").strip()
+        if not name or not title:
+            continue
+        key = _signal_key(name, title)
+        if key in seen:
+            continue
+        seen.add(key)
+        rec = dict(s)
+        rec["id"] = f"ev{base + i}"
+        events.append(rec)
+        added += 1
+    _write(EVENTS_FILE, events)
+    return jsonify({"count": added})
+
+
 # ---------------- AI helper (OpenAI) ----------------
 def _ai_client():
     """Return an OpenAI client, or (None, error). Error is 'no_key' when the

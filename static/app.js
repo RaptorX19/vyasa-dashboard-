@@ -512,9 +512,82 @@ function Accounts({ aiEnabled }) {
   );
 }
 
+/* ---------------- Fetch-latest-signals modal ---------------- */
+function SignalFetchModal({ aiEnabled, onClose, onImported }) {
+  const [days, setDays] = useState(90);
+  const [loading, setLoading] = useState(false);
+  const [candidates, setCandidates] = useState([]);
+  const [picked, setPicked] = useState({});
+  const [error, setError] = useState("");
+  const [info, setInfo] = useState("");
+
+  const run = async () => {
+    setLoading(true); setError(""); setInfo(""); setCandidates([]); setPicked({});
+    try {
+      const res = await api.post("/api/events/discover", { days: Number(days) });
+      if (res.error) setError(res.error);
+      else if (!res.candidates || res.candidates.length === 0) setInfo("No new signals found in this window — they may already be tracked. Try a wider range.");
+      else { setCandidates(res.candidates); setPicked(Object.fromEntries(res.candidates.map((_, i) => [i, true]))); }
+    } catch (e) { setError(String(e)); }
+    setLoading(false);
+  };
+
+  const importSelected = async () => {
+    const chosen = candidates.filter((_, i) => picked[i]);
+    if (!chosen.length) return;
+    setLoading(true);
+    const res = await api.post("/api/events/import", { events: chosen });
+    setLoading(false);
+    setInfo(`Imported ${res.count} signal${res.count === 1 ? "" : "s"}.`);
+    setCandidates([]); setPicked({});
+    onImported();
+  };
+
+  return (
+    <div className="overlay" onClick={onClose}>
+      <div className="modal wide" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-head">
+          <div><div className="modal-title">Fetch latest signals</div><div className="modal-sub">AI web search for recent funding, product &amp; GTM moves across your tracked competitors.</div></div>
+          <button className="x" onClick={onClose}>×</button>
+        </div>
+        <div className="modal-body">
+          {!aiEnabled && <div className="note warn">Signal discovery is offline. Set the <code>OPENAI_API_KEY</code> environment variable to enable live web-search.</div>}
+          <div className="discover-bar">
+            <div className="field" style={{ width: 160 }}><label>Look back</label><select className="select" value={days} onChange={(e) => setDays(e.target.value)}>{[30, 60, 90, 180, 365].map((n) => <option key={n} value={n}>Last {n} days</option>)}</select></div>
+            <button className="btn accent" disabled={!aiEnabled || loading} onClick={run}>{loading ? <><span className="spinner"></span> Searching…</> : "✦ Fetch"}</button>
+          </div>
+          {error && <div className="note err">{error}</div>}
+          {info && <div className="note">{info}</div>}
+          {candidates.length > 0 && (
+            <>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", margin: "8px 0 16px" }}>
+                <h2 style={{ margin: 0, fontSize: 18 }}>{candidates.length} signals found</h2>
+                <button className="btn primary" onClick={importSelected} disabled={loading}>Import selected ({Object.values(picked).filter(Boolean).length})</button>
+              </div>
+              {candidates.map((c, i) => (
+                <div className={`candidate ${picked[i] ? "sel" : ""}`} key={i}>
+                  <div className="candidate-top">
+                    <input type="checkbox" checked={!!picked[i]} onChange={() => setPicked((p) => ({ ...p, [i]: !p[i] }))} />
+                    <span className="candidate-name">{c.title}</span>
+                    <span className={`pill ${(c.type || "other")}`}>{c.type}</span>
+                    <span className="cc-funding" style={{ marginLeft: "auto" }}>{c.date}</span>
+                  </div>
+                  <div className="cc-overview" style={{ margin: "10px 0 6px" }}>{c.detail}</div>
+                  <div className="tag">{c.competitor}{c.impact ? ` · Impact: ${c.impact}` : ""}{c.source ? " · " : ""}{c.source && <a href={c.source} target="_blank" rel="noreferrer">source</a>}</div>
+                </div>
+              ))}
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ---------------- Signals ---------------- */
-function Signals({ events, items, onChange }) {
+function Signals({ events, items, aiEnabled, onChange }) {
   const [adding, setAdding] = useState(false);
+  const [fetchOpen, setFetchOpen] = useState(false);
   const blank = { competitor: "", date: new Date().toISOString().slice(0, 10), type: "funding", title: "", detail: "", source: "", impact: "" };
   const [f, setF] = useState(blank);
 
@@ -534,8 +607,10 @@ function Signals({ events, items, onChange }) {
       </div>
       <div className="toolbar">
         <button className="btn primary" onClick={() => setAdding((a) => !a)}>{adding ? "Cancel" : "+ Add signal"}</button>
+        <button className="btn accent" onClick={() => setFetchOpen(true)}>✦ Fetch latest</button>
         <span className="tag">{events.length} signals</span>
       </div>
+      {fetchOpen && <SignalFetchModal aiEnabled={aiEnabled} onClose={() => setFetchOpen(false)} onImported={onChange} />}
       {adding && (
         <div className="panel" style={{ marginBottom: 20 }}>
           <div className="form-grid">
@@ -953,7 +1028,7 @@ function App() {
         {view === "workflows" && <Workflows items={items} wfLabels={wfLabels} vyasa={vyasa} />}
         {view === "battlecards" && <Battlecards items={items} aiEnabled={aiEnabled} onUpdated={reload} />}
         {view === "accounts" && <Accounts aiEnabled={aiEnabled} />}
-        {view === "signals" && <Signals events={events} items={items} onChange={reloadEvents} />}
+        {view === "signals" && <Signals events={events} items={items} aiEnabled={aiEnabled} onChange={reloadEvents} />}
         {view === "insights" && <Insights aiEnabled={aiEnabled} />}
       </main>
 
