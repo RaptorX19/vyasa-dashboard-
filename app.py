@@ -147,6 +147,10 @@ def normalize(comp):
         comp.setdefault(key, [])
     comp.setdefault("strategicNotes", "")
     comp.setdefault("source", "manual")
+    # Scores: contextScore may be null; threatScoreOverride is null unless the
+    # user manually pins the threat score (else the frontend auto-computes it).
+    comp.setdefault("contextScore", None)
+    comp.setdefault("threatScoreOverride", None)
     try:
         comp["categoryGroup"] = int(comp.get("categoryGroup") or 0)
     except (TypeError, ValueError):
@@ -155,6 +159,14 @@ def normalize(comp):
         comp["fundingAmount"] = float(comp.get("fundingAmount") or 0)
     except (TypeError, ValueError):
         comp["fundingAmount"] = 0
+    for key in ("contextScore", "threatScoreOverride"):
+        if comp.get(key) in ("", None):
+            comp[key] = None
+        else:
+            try:
+                comp[key] = int(round(float(comp[key])))
+            except (TypeError, ValueError):
+                comp[key] = None
     return comp
 
 

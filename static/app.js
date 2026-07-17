@@ -26,16 +26,22 @@ const fmtFunding = (m) => {
 const blankComp = () => ({
   name: "", category: "", categoryGroup: 0, website: "", founder: "", customerSegment: "",
   relevance: "High", overview: "", established: "", fundingStage: "", fundingAmount: 0,
-  fundingYear: "", investors: "", strategicNotes: "",
+  fundingYear: "", investors: "", strategicNotes: "", contextScore: "", threatScoreOverride: "",
   strengths: [], weaknesses: [], opportunities: [], threats: [],
 });
 
-// Composite competitive-threat score 0-100 from relevance, funding and context depth.
-const threatScore = (c) => {
+// Auto composite threat score 0-100 from relevance, funding and context depth.
+const autoThreatScore = (c) => {
   const rel = { High: 40, "Medium-High": 30, Medium: 20, Low: 10 }[c.relevance] || 8;
   const fund = Math.min((Number(c.fundingAmount) || 0) / 15, 30);
   const ctx = (Number(c.contextScore) || 0) * 0.3;
   return Math.min(100, Math.round(rel + fund + ctx));
+};
+// Threat score honors a manual override when set, else falls back to the auto value.
+const threatScore = (c) => {
+  const o = c.threatScoreOverride;
+  if (o !== undefined && o !== null && o !== "") return Math.min(100, Math.max(0, Math.round(Number(o))));
+  return autoThreatScore(c);
 };
 const scoreCls = (n) => (n >= 66 ? "hi" : n >= 40 ? "mid" : "lo");
 const capCls = (v) => (v === "full" || v === "direct" ? (v === "direct" ? "direct" : "full") : v === "partial" ? "partial" : "none");
@@ -683,7 +689,8 @@ function DetailModal({ comp, labels, capLabels, onClose, onEdit, onDelete }) {
 function EditModal({ comp, labels, aiEnabled, onClose, onSave }) {
   const [f, setF] = useState(() => ({ ...blankComp(), ...comp }));
   const set = (k, v) => setF((s) => ({ ...s, [k]: v }));
-  const setList = (k, v) => set(k, v.split("\n").map((x) => x.trim()).filter(Boolean));
+  // Keep raw lines while typing (so spaces/blank lines survive); clean on save.
+  const setList = (k, v) => set(k, v.split("\n"));
   const isEdit = !!comp;
 
   const [linkedin, setLinkedin] = useState("");
@@ -717,7 +724,20 @@ function EditModal({ comp, labels, aiEnabled, onClose, onSave }) {
 
   const save = () => {
     if (!f.name.trim()) { alert("Name is required"); return; }
-    const payload = { ...f, fundingAmount: Number(f.fundingAmount) || 0, categoryGroup: Number(f.categoryGroup) || 0, fundingYear: f.fundingYear ? Number(f.fundingYear) : null };
+    const cleanList = (arr) => (arr || []).map((x) => x.trim()).filter(Boolean);
+    const numOrNull = (v) => (v === "" || v === null || v === undefined ? null : Number(v));
+    const payload = {
+      ...f,
+      fundingAmount: Number(f.fundingAmount) || 0,
+      categoryGroup: Number(f.categoryGroup) || 0,
+      fundingYear: f.fundingYear ? Number(f.fundingYear) : null,
+      contextScore: numOrNull(f.contextScore),
+      threatScoreOverride: numOrNull(f.threatScoreOverride),
+      strengths: cleanList(f.strengths),
+      weaknesses: cleanList(f.weaknesses),
+      opportunities: cleanList(f.opportunities),
+      threats: cleanList(f.threats),
+    };
     onSave(payload, isEdit);
   };
 
@@ -757,6 +777,8 @@ function EditModal({ comp, labels, aiEnabled, onClose, onSave }) {
             <div className="field"><label>Funding amount ($M)</label><input type="number" value={f.fundingAmount} onChange={(e) => set("fundingAmount", e.target.value)} /></div>
             <div className="field"><label>Funding year</label><input type="number" value={f.fundingYear || ""} onChange={(e) => set("fundingYear", e.target.value)} /></div>
             <div className="field"><label>Founders</label><input value={f.founder} onChange={(e) => set("founder", e.target.value)} /></div>
+            <div className="field"><label>Context score (0–100)</label><input type="number" min="0" max="100" value={f.contextScore ?? ""} onChange={(e) => set("contextScore", e.target.value)} placeholder="e.g. 70" /></div>
+            <div className="field"><label>Threat score override</label><input type="number" min="0" max="100" value={f.threatScoreOverride ?? ""} onChange={(e) => set("threatScoreOverride", e.target.value)} placeholder={`Auto: ${autoThreatScore(f)} — leave blank to auto-calc`} /></div>
             <div className="field full"><label>Investors</label><input value={f.investors} onChange={(e) => set("investors", e.target.value)} /></div>
             <div className="field full"><label>Overview</label><textarea value={f.overview} onChange={(e) => set("overview", e.target.value)} /></div>
             <div className="field full"><label>Strategic notes</label><textarea value={f.strategicNotes} onChange={(e) => set("strategicNotes", e.target.value)} /></div>
