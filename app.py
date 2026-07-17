@@ -323,6 +323,96 @@ def discover():
     return jsonify({"candidates": fresh, "count": len(fresh)})
 
 
+@app.route("/api/enrich", methods=["POST"])
+def enrich():
+    """Scrape a company's website / LinkedIn and scan the wider web to auto-fill
+    a single competitor profile. Returns the normalized record but does NOT
+    persist it — the frontend drops it into the Add form for review."""
+    client, cerr = _ai_client()
+    if cerr == "no_key":
+        return (
+            jsonify(
+                {
+                    "error": "OPENAI_API_KEY not set. Add it to your environment "
+                    "to enable auto-fill."
+                }
+            ),
+            400,
+        )
+    if cerr:
+        return jsonify({"error": cerr}), 500
+
+    body = request.get_json(silent=True) or {}
+    name = (body.get("name") or "").strip()
+    website = (body.get("website") or "").strip()
+    linkedin = (body.get("linkedin") or "").strip()
+    if not (name or website or linkedin):
+        return (
+            jsonify(
+                {"error": "Provide at least a company name, website, or LinkedIn URL."}
+            ),
+            400,
+        )
+
+    schema_hint = (
+        '{"name": str, "category": str (e.g. "4. Procurement / P2P"), '
+        '"categoryGroup": int (1=AI-native ERP, 2=AI layer on ERP, '
+        "3=Finance automation, 4=Procurement/P2P, 5=Order-to-cash/AR, "
+        '6=Supply chain, 8=Enterprise agents, 0=other), "website": str, '
+        '"founder": str, "customerSegment": str, "relevance": '
+        '"High"|"Medium-High"|"Medium"|"Low" (how directly they compete with '
+        'Vyasa), "overview": str, "fundingStage": str, "fundingAmount": number '
+        '(most recent total, millions USD, 0 if unknown), "fundingYear": '
+        'int|null, "investors": str, "strengths": [str], "weaknesses": [str], '
+        '"opportunities": [str], "threats": [str], "strategicNotes": str}'
+    )
+
+    sources = []
+    if website:
+        sources.append(f"Company website: {website}")
+    if linkedin:
+        sources.append(f"LinkedIn page: {linkedin}")
+    src_line = (
+        "\n".join(sources)
+        if sources
+        else "(no direct URLs provided — find the company by name via web search)"
+    )
+    who = name or website or linkedin
+
+    prompt = (
+        f"{VYASA_CONTEXT}\n\n"
+        f"Build a competitor profile for the company: {who}.\n"
+        f"Read these primary sources first:\n{src_line}\n\n"
+        "Use web search to read the company's own website and LinkedIn, then scan "
+        "the web (news, press releases, Crunchbase/funding databases) to fill "
+        "EVERY field below. Extract verifiable facts only — do not invent. If a "
+        "field genuinely cannot be found, use an empty string, 0, or null. "
+        "For strengths/weaknesses/opportunities/threats, assess them relative to "
+        "Vyasa. Keep the overview to 2-3 sentences.\n\n"
+        "Return ONLY a JSON object (no prose, no markdown fences) matching this "
+        f"schema:\n{schema_hint}"
+    )
+
+    text, aerr = _openai_text(client, prompt, use_search=True, max_tokens=3000)
+    if aerr:
+        return jsonify({"error": aerr}), 502
+
+    data = _extract_json(text)
+    if data is None:
+        return jsonify({"error": "Could not parse AI response", "raw": text[:2000]}), 502
+
+    comp = data.get("competitor", data) if isinstance(data, dict) else {}
+    if not isinstance(comp, dict):
+        return jsonify({"error": "AI returned an unexpected shape", "raw": text[:2000]}), 502
+    # Preserve exactly what the user typed for the source URL and name.
+    if website:
+        comp["website"] = website
+    if name:
+        comp["name"] = name
+    comp["source"] = "ai-enriched"
+    return jsonify({"competitor": normalize(comp)})
+
+
 def _extract_json(text):
     """Pull a JSON object out of model text, tolerating code fences/prose."""
     text = text.strip()

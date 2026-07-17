@@ -680,11 +680,40 @@ function DetailModal({ comp, labels, capLabels, onClose, onEdit, onDelete }) {
 }
 
 /* ---------------- Add/Edit form ---------------- */
-function EditModal({ comp, labels, onClose, onSave }) {
+function EditModal({ comp, labels, aiEnabled, onClose, onSave }) {
   const [f, setF] = useState(() => ({ ...blankComp(), ...comp }));
   const set = (k, v) => setF((s) => ({ ...s, [k]: v }));
   const setList = (k, v) => set(k, v.split("\n").map((x) => x.trim()).filter(Boolean));
   const isEdit = !!comp;
+
+  const [linkedin, setLinkedin] = useState("");
+  const [enriching, setEnriching] = useState(false);
+  const [enrichErr, setEnrichErr] = useState("");
+  const [enrichInfo, setEnrichInfo] = useState("");
+
+  const autofill = async () => {
+    setEnriching(true); setEnrichErr(""); setEnrichInfo("");
+    try {
+      const res = await api.post("/api/enrich", { name: f.name, website: f.website, linkedin });
+      if (res.error) setEnrichErr(res.error);
+      else if (res.competitor) {
+        const c = res.competitor;
+        // Merge only fields the model actually found so we never wipe what the
+        // user already typed. Preserve the URL they entered as the source.
+        setF((s) => {
+          const merged = { ...s };
+          Object.entries(c).forEach(([k, v]) => {
+            const filled = Array.isArray(v) ? v.length > 0 : v !== "" && v !== null && v !== undefined;
+            if (filled) merged[k] = v;
+          });
+          if (s.website) merged.website = s.website;
+          return merged;
+        });
+        setEnrichInfo("Fields filled from the web — review and edit before saving.");
+      }
+    } catch (e) { setEnrichErr(String(e)); }
+    setEnriching(false);
+  };
 
   const save = () => {
     if (!f.name.trim()) { alert("Name is required"); return; }
@@ -700,6 +729,23 @@ function EditModal({ comp, labels, onClose, onSave }) {
           <button className="x" onClick={onClose}>×</button>
         </div>
         <div className="modal-body">
+          <div className="autofill">
+            <div className="autofill-head">
+              <span className="autofill-title">✦ Auto-fill from the web</span>
+              <span className="autofill-sub">Enter a company name, website, and/or LinkedIn URL — we’ll scrape those and search the web to fill in the rest. Review everything before saving.</span>
+            </div>
+            <div className="autofill-row">
+              <input placeholder="Company name" value={f.name} onChange={(e) => set("name", e.target.value)} />
+              <input placeholder="Website URL" value={f.website} onChange={(e) => set("website", e.target.value)} />
+              <input placeholder="LinkedIn URL" value={linkedin} onChange={(e) => setLinkedin(e.target.value)} />
+              <button className="btn accent" disabled={!aiEnabled || enriching || (!f.name.trim() && !f.website.trim() && !linkedin.trim())} onClick={autofill}>
+                {enriching ? <><span className="spinner"></span> Scraping…</> : "✦ Auto-fill"}
+              </button>
+            </div>
+            {!aiEnabled && <div className="note warn" style={{ marginTop: 10 }}>Auto-fill is offline. Set the <code>OPENAI_API_KEY</code> environment variable to enable web scraping.</div>}
+            {enrichErr && <div className="note err" style={{ marginTop: 10 }}>{enrichErr}</div>}
+            {enrichInfo && <div className="note" style={{ marginTop: 10 }}>{enrichInfo}</div>}
+          </div>
           <div className="form-grid">
             <div className="field"><label>Name *</label><input value={f.name} onChange={(e) => set("name", e.target.value)} /></div>
             <div className="field"><label>Website</label><input value={f.website} onChange={(e) => set("website", e.target.value)} /></div>
@@ -890,7 +936,7 @@ function App() {
       </main>
 
       {detail && <DetailModal comp={detail} labels={labels} capLabels={capLabels} onClose={() => setDetail(null)} onEdit={(c) => { setDetail(null); setEditing(c); }} onDelete={remove} />}
-      {editing !== undefined && <EditModal comp={editing} labels={labels} onClose={() => setEditing(undefined)} onSave={save} />}
+      {editing !== undefined && <EditModal comp={editing} labels={labels} aiEnabled={aiEnabled} onClose={() => setEditing(undefined)} onSave={save} />}
       {discover && <DiscoverModal aiEnabled={aiEnabled} onClose={() => setDiscover(false)} onImported={() => { reload(); }} />}
     </div>
   );
