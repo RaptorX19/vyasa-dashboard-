@@ -23,8 +23,28 @@ try:
 except ImportError:
     pass
 
-DATA_FILE = BASE_DIR / "data" / "competitors.json"
-EVENTS_FILE = BASE_DIR / "data" / "events.json"
+# Seed files ship in the repo image (read-only reference copy). Live data lives
+# in DATA_DIR, which points at a persistent Railway Volume in production (set
+# DATA_DIR=/data) and defaults to the repo's ./data locally. On first boot we
+# copy the seeds into an empty volume so a fresh deploy starts populated but
+# subsequent adds survive redeploys.
+SEED_DIR = BASE_DIR / "data"
+DATA_DIR = Path(os.environ.get("DATA_DIR") or SEED_DIR)
+DATA_FILE = DATA_DIR / "competitors.json"
+EVENTS_FILE = DATA_DIR / "events.json"
+
+
+def _ensure_seeded():
+    """Populate DATA_DIR from the committed seeds on first boot (no-op when the
+    files already exist, e.g. locally where DATA_DIR == SEED_DIR)."""
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    for fname in ("competitors.json", "events.json"):
+        target, seed = DATA_DIR / fname, SEED_DIR / fname
+        if not target.exists() and seed.exists():
+            target.write_text(seed.read_text())
+
+
+_ensure_seeded()
 
 app = Flask(__name__, static_folder="static", template_folder="templates")
 _lock = threading.Lock()
